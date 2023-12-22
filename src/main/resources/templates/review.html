@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ko-KR" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>영화페이지</title>
+    <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
+
+        *{
+        margin: 0;
+        padding: 0;
+        list-style: 0;
+        text-decoration: none;
+
+        }
+
+        .header{
+        width: 100%;
+        height: 100px;
+        background: #EEEEEE;
+        font-family: 'Gothic A1', sans-serif;
+        font-weight: 200;
+        }
+
+        .header-content{
+        width: 80%;
+        height: 100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        .logo{
+        flex-grow: 3;
+        margin: 0 0 0 0;
+        font-family: 'Gothic A1', sans-serif;
+        font-weight: 200;
+        font-size: 14px;
+        cursor:pointer;
+        }
+
+        .search{
+        flex-grow: 4;
+        height: 100%;
+        display: flex;
+
+        }
+
+        .login_btn{
+        font-weight: normal;
+        padding: 10px;
+        background-color: #bcc7cc;
+        color: #FFFFFF;
+        text-decoration-line: none;
+        border-radius: 10px;
+        }
+
+        .mypageLink{
+        text-decoration-line: none;
+        color: #000000;
+        }
+
+        .s-box{
+        width: 500px;
+        height: 50px;
+        position: relative;
+        margin-top: 20px;
+        align-items: center;
+        }
+
+        .s-box input {
+        width: 100%;
+        height: 45px;
+        border: 1px solid #bbb;
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 15px;
+        }
+
+        .s-box button {
+        position: absolute;
+        width:  65px;
+        height: 65px;
+        top: 2px;
+        right: -25px;
+        margin: 0;
+        border: none;
+        background-color:transparent;
+        }
+
+        .s-box button img {
+            width: 40px;
+            height: 40px;
+        }
+
+        summary {
+            list-style: none;
+            margin-left: 550px;
+            margin-top: 0px;
+        }
+
+        summary::marker {
+            display:none;
+            content: "▼";
+        }
+
+        details[open]{
+        margin-top: 20px;
+        border-radius:8px;
+        padding: 0;
+        background: #EBF5FB;
+        position: relative;
+        }
+
+        details[open] summary{
+        color: #4E4FEB;
+        }
+
+        details[open] summary::marker{
+        color: #4E4FEB;
+        content: "▲";
+        }
+
+
+        .s-check{
+        display: flex;
+        align-items: center;
+        }
+
+        .s-d-genre{
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 1em;
+        }
+
+        .s-d-sort{
+        margin: auto auto;
+        }
+
+        .nav-area{
+        flex-grow: 1;
+        margin: auto;
+        font-weight: 700;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        }
+
+
+        .nav-area a{
+        height: 100%;
+        font-size: 16px;
+        }
+
+        .top {
+            width: 80%;
+            height: 450px;
+            margin: 2.2em auto 2.2em auto;
+            border-bottom: 2px solid #bbb;
+
+        }
+
+        .poster img {
+            height: 400px;
+            margin: 0 60px 20px 0;
+            float: left;
+        }
+
+        .top #movieName {
+            font-size: 50px;
+            font-weight: 700;
+            margin-bottom: 0.6em;
+        }
+
+        #like {
+            margin-left: 30px;
+        }
+
+        .input-review {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        ul {
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        li{
+            width: 100%;
+            display: inline-block;
+
+        }
+
+
+
+        textarea.int {
+            width: 75%;
+            height: 3.3em;
+            resize: vertical;
+        }
+
+        .comment-form input.btn {
+            text-align: right;
+        }
+
+        .comment-top {
+            width: 75%;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto 5px auto;
+        }
+
+        .comment-bottom{
+            width: 75%;
+            margin: 0 auto;
+            text-align: right;
+        }
+
+
+        .circle-button {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            background-image: url(https://cdn-icons-png.flaticon.com/512/93/93548.png?w=740&t=st=1689488488~exp=1689489088~hmac=f4d1482045ab14bb5cdf39940486c3351849a6608d9d26cfeed029cd46e251cb);
+            /* 초기 이미지 파일 경로 설정 */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            transition: transform 1s, background-image 1s;
+            border: none;
+            border-radius: 50%;
+            float: left;
+        }
+
+        .circle-button.clicked {
+            transform: rotate(360deg);
+            background-image: url(https://cdn-icons-png.flaticon.com/512/992/992482.png?w=740&t=st=1689488414~exp=1689489014~hmac=2f954d6b5f436197abe6fce0035f5948e904175ac4cc0222be71545c7cc8bd89);
+            /* 클릭 후 변경할 이미지 파일 경로 설정 */
+        }
+
+
+        .starpoint_wrap {
+            display: inline-block;
+        }
+
+        .starpoint_box {
+            position: relative;
+            background: url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;
+            font-size: 0;
+        }
+
+        .starpoint_box .starpoint_bg {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 0;
+            height: 18px;
+            background: url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;
+            pointer-events: none;
+        }
+
+        .starpoint_box .label_star {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            box-sizing: border-box;
+        }
+
+        .starpoint_box .star_radio {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+
+        .starpoint_box .star_radio:nth-of-type(1):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(1):checked~.starpoint_bg {
+            width: 10%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(2):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(2):checked~.starpoint_bg {
+            width: 20%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(3):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(3):checked~.starpoint_bg {
+            width: 30%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(4):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(4):checked~.starpoint_bg {
+            width: 40%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(5):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(5):checked~.starpoint_bg {
+            width: 50%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(6):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(6):checked~.starpoint_bg {
+            width: 60%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(7):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(7):checked~.starpoint_bg {
+            width: 70%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(8):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(8):checked~.starpoint_bg {
+            width: 80%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(9):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(9):checked~.starpoint_bg {
+            width: 90%;
+        }
+
+        .starpoint_box .star_radio:nth-of-type(10):hover~.starpoint_bg,
+        .starpoint_box .star_radio:nth-of-type(10):checked~.starpoint_bg {
+            width: 100%;
+        }
+
+        .blind {
+            position: absolute;
+            clip: rect(0 0 0 0);
+            margin: -1px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .corr-bt {
+            width: 40px;
+            border: 1px solid rgb(8, 131, 149);
+            color: rgb(8, 131, 149);
+            background-color: white;
+
+        }
+
+        .reset-bt {
+
+            width: 40px;
+            border: 1px solid rgb(8, 131, 149);
+            color: rgb(8, 131, 149);
+            background-color: white;
+        }
+
+        .showComment {
+            margin: 25px auto;
+            width: 75%;
+            height: 100%;
+        }
+
+        .showComment table {
+            margin: 0 auto;
+            width: 100%;
+            border-top: 1px solid #bbb;
+            table-layout: fixed;
+        }
+
+        .showComment th,td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .showComment td {
+            border-top: 1px solid #bbb;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .star-review-back {
+            position: absolute;
+            color: gray;
+            font-size: 15px;
+            width: 75px;
+            transform: translateY(-50%);
+            overflow: hidden;
+        }
+
+        .star-review-front {
+            position: absolute;
+            color: blue;
+            font-size: 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            transform: translateY(-50%);
+            width: 75px;
+        }
+
+        .aboutComment{
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-content">
+            <!--로고-->
+            <div class="logo" onClick="location.href='/main'">
+                <h1>BPOSO</h1>
+            </div>
+            <!--검색창-->
+            <div class="search">
+                <form action="SearchMovie" method="post">
+    
+                    <!--검색창/검색박스-->
+                    <div class="s-box">
+                        <input type="text" name="searchName" placeholder="제목, 감독 등으로 찾아보세요">
+                        <button type="submit">
+                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" >
+                        </button>
+                    </div>
+    
+                    <!--검색창/상세검색-->
+                    <details>
+                        <summary>상세검색</summary>
+    
+                        <!--검색창/상세검색/버튼 누르면 이벤트 발생-->
+                        <div class="s-check">
+                            <div class="s-d-genre">
+                                <div class="col-1">
+                                    <h3>장르</h3>
+                                    <input type="checkbox" name="genre" value="checkall" onclick="selectAll(this)" checked> 전체 선택
+                                    <br>
+                                    <input type="checkbox" name="genre" value="드라마"  checked> 드라마
+                                    <br>
+                                    <input type="checkbox" name="genre" value="범죄"  checked> 범죄
+                                    <br>
+                                    <input type="checkbox" name="genre" value="코미디"  checked> 코미디
+                                    <br>
+                                    <input type="checkbox" name="genre" value="액션"  checked> 액션
+                                    <br>
+                                    <input type="checkbox" name="genre" value="공포(호러)"  checked> 공포(호러)
+                                    <br>
+                                    <input type="checkbox" name="genre" value="미스터리"  checked> 미스터리
+                                    <br>
+                                    <input type="checkbox" name="genre" value="사극"  checked> 사극
+                                </div>
+    
+                                <div class="col-2">
+                                    <input type="checkbox" name="genre" value="스릴러" checked> 스릴러
+                                    <br>
+                                    <input type="checkbox" name="genre" value="애니메이션"  checked> 애니메이션
+                                    <br>
+                                    <input type="checkbox" name="genre" value="멜로/로맨스"  checked> 멜로/로맨스
+                                    <br>
+                                    <input type="checkbox" name="genre" value="공연"  checked> 공연
+                                    <br>
+                                    <input type="checkbox" name="genre" value="다큐멘터리"  checked> 다큐멘터리
+                                    <br>
+                                    <input type="checkbox" name="genre" value="가족"  checked> 가족
+                                    <br>
+                                    <input type="checkbox" name="genre" value="기타"  checked> 기타
+                                    <br>
+                                    <input type="checkbox" name="genre" value="성인물(에로)"  checked> 성인물(에로)
+                                </div>
+    
+                            </div>
+                            <div class="s-d-sort">
+    
+                                <h3>정렬</h3>
+                                <input type="radio" name="sort" value="관객많은순" checked> 관객많은순
+                                <br>
+                                <input type="radio" name="sort" value="관객적은순"> 관객적은순
+                                <br>
+                                <input type="radio" name="sort" value="별점높은순"> 별점높은순
+                                <br>
+                                <input type="radio" name="sort" value="별점낮은순"> 별점낮은순
+                            </div>
+                        </div>
+                    </details>
+                </form>
+            </div>
+    
+            <div class="nav-area">
+    
+                <span id="show-id" th:text="${session.loginId}" > 아이디</span> <span id="show-texid"> 님</span>
+                <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+                <a class="login_btn" id="login-text" href="/login">로그인</a>
+                <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
+                <!--<a sec:authorize="isAuthenticated()" id="login-text" href="/login">로그인</a>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="top">
+
+        <div class="poster">
+            <img src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201602/19/htm_20160219171437117902.jpg"
+                alt="포스터">
+        </div>
+        <div class="movie_1">
+            <!--(여기다가 넣을것들~ 영화제목 감독 출연 개봉년도)-->
+            <!--<p id="movieName">영화 제목</p>-->
+            <span id="movieName" th:text="${movNm}">제목</span><br>
+            <br>
+            <span> 감독: </span>
+            <span th:text="${drctr}"></span><br>
+            <span> 개봉연도: </span>
+            <span th:text="${opd}"></span>
+
+            <!--평점과 보고싶어요-->
+            <p>평점: ★(평점넣기)</p>
+            <br>
+
+            <div class="www">
+                <button class="circle-button" onclick="this.classList.toggle('clicked')" align="middle">
+                </button>
+                <span id="like"><br>&nbsp; 보고싶어요</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="input-review">
+        <ul class="comment" id="subPorm">
+            <li class="comment-form">
+                <!--<form id="commentFrm">-->
+                <form class="PostReview" action="PostReview" method="post">
+                    <input type="hidden" name="no" th:value="${no}">
+                    <div class="comment-top">
+                        <!--왼쪽 아이디 띄우기-->
+                        <h4><span id="myid">본인아이디:</span></h4>
+                        <p th:text="${session.loginId}"></p>
+                        <!--중간 별점 재기-->
+                        <div class="starpoint_wrap">
+                            <div class="starpoint_box">
+                                <label for="starpoint_1" class="label_star" title="0.5"><span
+                                        class="blind">0.5점></span></label>
+                                <label for="starpoint_2" class="label_star" title="1.0"><span
+                                        class="blind">1점></span></label>
+                                <label for="starpoint_3" class="label_star" title="1.5"><span
+                                        class="blind">1.5점></span></label>
+                                <label for="starpoint_4" class="label_star" title="2.0"><span
+                                        class="blind">2점></span></label>
+                                <label for="starpoint_5" class="label_star" title="2.5"><span
+                                        class="blind">2.5점></span></label>
+                                <label for="starpoint_6" class="label_star" title="3.0"><span
+                                        class="blind">3점></span></label>
+                                <label for="starpoint_7" class="label_star" title="3.5"><span
+                                        class="blind">3.5점></span></label>
+                                <label for="starpoint_8" class="label_star" title="4.0"><span
+                                        class="blind">4점></span></label>
+                                <label for="starpoint_9" class="label_star" title="4.5"><span
+                                        class="blind">4.5점></span></label>
+                                <label for="starpoint_10" class="label_star" title="5.0"><span
+                                        class="blind">5점></span></label>
+                                <input type="radio" name="starpoint" id="starpoint_1" value="0.5" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_2" value="1.0" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_3" value="1.5" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_4" value="2.0" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_5" value="2.5" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_6" value="3.0" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_7" value="3.5" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_8" value="4.0" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_9" value="4.5" class="star_radio">
+                                <input type="radio" name="starpoint" id="starpoint_10" value="5.0" class="star_radio">
+                                <span class="starpoint_bg"></span>
+                            </div>
+                        </div>
+
+                        <span class="bt">
+                            <button class="corr-bt" type="#">수정</button>
+                            <button class="reset-bt" type="reset">삭제</button>
+                        </span>
+                    </div>
+
+                    <span class="ps_box">
+                        <textarea placeholder="리뷰를 적어보세요" class="int" name="reviewContent"></textarea>
+                    </span>
+                    <br>
+                    <!--<input type="submit" class="btn" onclick="reviewPostFun(event)" value="등록">-->
+                    <div class="comment-bottom">
+                        <button type="button" onclick="reviewPostFun(event)">등록</button>
+                    </div>
+                </form>
+                <!--</form>-->
+            </li>
+        </ul>
+
+        <div class="showComment">
+            <table th:each="Review: ${reviewList}">
+                <thead>
+                    <tr>
+                        <th> 평점 </th>
+                        <th> 아이디 </th>
+                        <th> 내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <!-- 별점 숫자지???
+                    이거 switch문이니까 별점대로 th:case 수정해도됨 -->
+                            <th:block th:switch="${Review.rate}">
+                                <div class="star-review-back">
+                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                </div>
+                                <span th:case="0">
+                                    <div class="star-review-front" style="width:0px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="0.5">
+                                    <div class="star-review-front" style="width:8px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="1">
+                                    <div class="star-review-front" style="width:15px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="1.5">
+                                    <div class="star-review-front" style="width:23px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="2">
+                                    <div class="star-review-front" style="width:30px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="2.5">
+                                    <div class="star-review-front" style="width:38px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="3">
+                                    <div class="star-review-front" style="width:45px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="3.5">
+                                    <div class="star-review-front" style="width:53px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="4">
+                                    <div class="star-review-front" style="width:60px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="4.5">
+                                    <div class="star-review-front" style="width:68px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                                <span th:case="5">
+                                    <div class="star-review-front" style="width:75px">
+                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                    </div>
+                                </span>
+                            </th:block>
+                        </td>
+                        <td th:text="${Review.userId}">아이디</td>
+                        <td class="aboutComment" th:text="${Review.reviewCon}">댓글내용</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!--리뷰 내용, 별점 입력하지 않으면 넘어가지 않도록 해야 한다-->
+    <script>
+        var loginId = document.getElementById("show-id").innerText;
+
+        if (loginId !== "n") {
+            document.getElementById("login-text").style.display = "none";
+            document.getElementById("sign-text").style.display = "none";
+
+        }
+        else {
+            document.getElementById("show-id").style.display = "none";
+            document.getElementById("show-texid").style.display = "none";
+            document.getElementById("mypageLink").style.display = "none";
+            document.getElementById("subPorm").style.display = "none";
+        }
+
+        function reviewPostFun(event) {
+            const starRadios = document.querySelectorAll('input.star_radio');
+            const reviewContent = document.querySelector('textarea[name="reviewContent"]').value;
+            let isSelected = false;
+
+            for (const radio of starRadios) {
+                if (radio.checked) {
+                    isSelected = true;
+                    break;
+                }
+            }
+
+            if (!isSelected) {
+                event.preventDefault();
+                alert("별점을 선택해주세요.");
+            }
+            else if (reviewContent.trim() === "") {
+                alert("리뷰를 작성해주세요.");
+            }
+            else {
+                document.querySelector(".PostReview").submit();
+            }
+        }
+    </script>
+</body>
+
+</html>

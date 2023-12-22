@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+    <style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
+
+
+html {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px;
+  background: #F6F1F1;
+}
+
+.header {
+  font-family: 'Noto Serif KR', serif;
+  position:fixed;
+  top:0;
+  width: 100%;
+  height: 10vh;
+  align-items: flex-start;
+  background: #146C94;
+  font-size: 0.5em;
+  justify-content: flex-start;
+  z-index: 2;
+
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #1D5B79;
+}
+
+.sidebar {
+  position: fixed;
+  width: 25%;
+  height: 100%;
+  background: #19A7CE;
+  font-size: 1.1em;
+  overflow: auto;
+  z-index: 1;
+}
+
+.nav {
+  position: relative;
+  margin: 0 15%;
+  text-align: right;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.nav ul {
+  list-style: none;
+
+  li {
+    position: relative;
+    margin: 3.2em 0;
+
+    a {
+      line-height: 5em;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.4em;
+      color: rgba(#0A6EBD, 0.75);
+      display: block;
+      transition: all ease-out 300ms;
+    }
+
+    &.active a {
+      color: white;
+    }
+
+    &:not(.active)::after {
+      opacity: 0.2;
+    }
+
+    &:not(.active):hover a {
+      color: rgba(#FFF, 0.75);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 0.2em;
+      background: black;
+      left: 0;
+      bottom: 0;
+      background-image: linear-gradient(to right, #5e42a6, #b74e91)
+    }
+  }
+}
+
+.temp {
+  position: relative;
+  width: 75%;
+  float: right;
+  height: 100vh;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  a {
+    position: relative;
+  }
+
+  p {
+    text-transform: uppercase;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    color: #EEEEEE;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+}
+
+    </style>
+</head>
+
+
+<main class="main">
+    <header class="header">
+        <li><a href="/">로고(홈으로)</a></li>
+        <h2>제발 하루만 더 시간주라 사랑한다</h2>
+    </header>
+    <aside class="sidebar">
+        <nav class="nav">
+            <ul>
+                <li class="active"><a href="#">목록</a></li>
+                <p>-----------</p>
+                <li><a href="#">보고싶어요</a></li>
+                <li><a href="#">후기</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <section class="temp">
+        <div class="container">
+            <p th:text="${name} + '님의'" > 아이디 님의</p>
+            <p>마이페이지</p>
+        </div>
+    </section>
+</main>
+
+</html>

@@ -13,8 +13,9 @@ public class SecurityConfig {
     //처음 뜨는 로그인 페이지를 지움
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll());
+        http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+                .csrf(csrf -> csrf.disable()); // CSRF 보호 비활성화
         return http.build();
     }
 }

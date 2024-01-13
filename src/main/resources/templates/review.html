@@ -507,7 +507,7 @@
 
     <div class="poster">
         <!--김도연 수정: 영화 포스터 이미지 삽입-->
-        <img id="posterURL" src="image/loading.png" alt="포스터">
+        <img id="posterURL" src="image/poster_loading.png" alt="포스터">
         <!--<img th:src="${posterPath}" alt="포스터">-->
     </div>
     <div class="movie_1">
@@ -699,6 +699,10 @@
             .then((json) => {
                 //console.log(json);
                 let postersValue = json.Data[0].Result[0].posters;
+
+                // 빈 문자열이면 종료
+                if (postersValue.trim() === "") return;
+
                 if (postersValue.includes('|')) {
                     // '|' 문자가 있다면(포스터가 여러개 있으면) 첫 번째 '|' 이전까지의 부분 문자열 추출
                     postersValue = postersValue.split('|')[0];
@@ -707,6 +711,7 @@
                     // '|' 문자가 없다면(포스터가 하나이므로) 원래 문자열 그대로 사용
                     console.log(postersValue);
                 }
+
                 document.getElementById("posterURL").src = postersValue;
             })
             .catch((error) => {

@@ -1,396 +1,382 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>영화 검색 결과</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: 0;
+            text-decoration: none;
 
-*{
-margin: 0;
-padding: 0;
-list-style: 0;
-text-decoration: none;
+        }
 
-}
+        .header {
+            width: 100%;
+            height: 100px;
+            background: #EEEEEE;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
+        }
 
-.header{
-width: 100%;
-height: 100px;
-background: #EEEEEE;
-font-family: 'Gothic A1', sans-serif;
-font-weight: 200;
-}
+        /* table은 동알한 넓이와 간격을 가지게 하기 위해 */
+        .header-content {
+            width: 80%;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* table은 동알한 넓이와 간격을 가지게 하기 위해 */
-.header-content{
-width: 80%;
-height: 100px;
-margin: 0 auto;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
+        .logo {
+            flex-grow: 3;
+            margin: 0 0 0 0;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
+            font-size: 14px;
+            cursor: pointer;
+        }
 
-.logo{
-    flex-grow: 3;
-    margin: 0 0 0 0;
-    font-family: 'Gothic A1', sans-serif;
-    font-weight: 200;
-    font-size: 14px;
-    cursor:pointer;
-}
+        .login_btn {
+            font-weight: normal;
+            padding: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            text-decoration-line: none;
+            border-radius: 10px;
+        }
 
-.login_btn{
-    font-weight: normal;
-    padding: 10px;
-    background-color: #bcc7cc;
-    color: #FFFFFF;
-    text-decoration-line: none;
-    border-radius: 10px;
-}
+        .mypageLink {
+            text-decoration-line: none;
+            color: #000000;
+        }
 
-.mypageLink{
-    text-decoration-line: none;
-    color: #000000;
-}
+        .search {
+            flex-grow: 4;
+            height: 100%;
+            display: flex;
 
-.search{
-flex-grow: 4;
-height: 100%;
-display: flex;
+        }
 
-}
+        .movi-id {
+            overflow: hidden;
+            word-break: break-all;
+            text-decoration-line: none;
+            color: #000000;
+            padding: 5px;
+        }
 
-.movi-id{
-overflow: hidden;
-word-break: break-all;
-text-decoration-line: none;
-color: #000000;
-padding: 5px;
-}
+        .s-box {
+            width: 500px;
+            height: 50px;
+            position: relative;
+            margin-top: 20px;
+            align-items: center;
+        }
 
-.s-box{
-width: 500px;
-height: 50px;
-position: relative;
-margin-top: 20px;
-align-items: center;
-}
+        .s-box input {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 15px;
+        }
 
-.s-box input {
-width: 100%;
-height: 45px;
-border: 1px solid #bbb;
-border-radius: 8px;
-padding: 10px 12px;
-font-size: 15px;
-}
+        .s-box button {
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            top: 2px;
+            right: -25px;
+            margin: 0;
+            border: none;
+            background-color: transparent;
+        }
 
-.s-box button {
-position: absolute;
-width:  65px;
-height: 65px;
-top: 2px;
-right: -25px;
-margin: 0;
-border: none;
-background-color:transparent;
-}
+        .s-box button img {
+            width: 40px;
+            height: 40px;
+        }
 
-.s-box button img {
-    width: 40px;
-    height: 40px;
-}
-
-summary {
+        summary {
             list-style: none;
             margin-left: 550px;
             margin-top: 0px;
         }
 
-  summary::marker {
-      display:none;
-      content: "▼";
-  }
-
-  details[open]{
-        margin-top: 20px;
-        border-radius:8px;
-        padding: 0;
-        background: #EBF5FB;
-        position: relative;
+        summary::marker {
+            display: none;
+            content: "▼";
         }
 
-details[open] summary{
-color: #4E4FEB;
-}
+        details[open] {
+            margin-top: 20px;
+            border-radius: 8px;
+            padding: 0;
+            background: #EBF5FB;
+            position: relative;
+        }
 
-details[open] summary::marker{
-color: #4E4FEB;
-content: "▲";
-}
+        details[open] summary {
+            color: #4E4FEB;
+        }
 
-
-.s-check{
-display: flex;
-align-items: center;
-}
-
-.s-d-genre{
-bottom: 0;
-margin: auto;
-display: flex;
-align-items: flex-end;
-padding-bottom: 1em;
-}
-
-.s-d-sort{
-margin: auto auto;
-}
-
-.nav-area{
-flex-grow: 1;
-margin: auto;
-font-weight: 700;
-top: 0;
-bottom: 0;
-left: 0;
-}
+        details[open] summary::marker {
+            color: #4E4FEB;
+            content: "▲";
+        }
 
 
-.nav-area a{
-height: 100%;
-font-size: 16px;
-}
+        .s-check {
+            display: flex;
+            align-items: center;
+        }
 
-.search-text{
-    width: 100%;
-    background-color: #454545;
-    color: white;
-    font-weight: 700;
-    height: 50px;
-    line-height: 50px;
-    padding-left: 10%;
-    z-index: 2;
+        .s-d-genre {
+            bottom: 0;
+            margin: auto;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 1em;
+        }
 
-    
-}
+        .s-d-sort {
+            margin: auto auto;
+        }
 
-.below{
-    width: 60%;
-    background-color: white;
-    min-height: 700px;
-    margin: 20px auto;
-    font-family: 'Gothic A1', sans-serif;
-    font-weight: 300;
-    font-size: 15px;
-    color:#454545;
-    z-index: 3;
-}
-
-.odd{
-    width: 50%;
-    min-height: 700px;
-    margin: 0;
-    float: left;
-}
-
-.even{
-    width: 50%;
-    min-height: 700px;
-    margin: 0;
-    float: right;
-}
-
-table{
-    margin-left: 0;
-    border-bottom: 1px solid gray;
-    table-layout: fixed;
-}
-
-td{
-    padding: 3px;
-    text-align: left;
-}
-
-.bold-name{
-    color:#000000;
-    font-weight: 700;
-    font-size: 19px;
-}
+        .nav-area {
+            flex-grow: 1;
+            margin: auto;
+            font-weight: 700;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
 
 
-      
+        .nav-area a {
+            height: 100%;
+            font-size: 16px;
+        }
+
+        .search-text {
+            width: 100%;
+            background-color: #454545;
+            color: white;
+            font-weight: 700;
+            height: 50px;
+            line-height: 50px;
+            padding-left: 10%;
+            z-index: 2;
 
 
+        }
+
+        .below {
+            width: 90%;
+            background-color: white;
+            min-height: 700px;
+            margin: 20px auto;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            color: #454545;
+            z-index: 3;
+            text-align: center;
+        }
+
+        .oddeven {
+            min-height: 700px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .odd {
+            width: 50%;
+            min-height: 700px;
+            margin: 0;
+            float: left;
+        }
+
+        .even {
+            width: 50%;
+            min-height: 700px;
+            margin: 0;
+            float: right;
+        }
+
+        table {
+            margin-left: 0;
+            border-bottom: 1px solid gray;
+            table-layout: fixed;
+        }
+
+        td {
+            padding: 3px;
+            text-align: left;
+        }
+
+        .bold-name {
+            color: #000000;
+            font-weight: 700;
+            font-size: 19px;
+        }
     </style>
 </head>
+
 <body>
-    <div class="header">
-        <div class="header-content">
-            <!--로고-->
-            <div class="logo" onClick="location.href='/main'">
-                <h1>BPOSO</h1>
-            </div>
-            <!--검색창-->
-            <div class="search">
-                <form action="SearchMovie" method="post">
-    
-                    <!--검색창/검색박스-->
-                    <div class="s-box">
-                        <input type="text" name="searchName" placeholder="제목, 감독 등으로 찾아보세요">
-                        <button type="submit">
-                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" >
-                        </button>
-                    </div>
-    
-                    <!--검색창/상세검색-->
-                    <details>
-                        <summary>상세검색</summary>
-    
-                        <!--검색창/상세검색/버튼 누르면 이벤트 발생-->
-                        <div class="s-check">
-                            <div class="s-d-genre">
-                                <div class="col-1">
-                                    <h3>장르</h3>
-                                    <input type="checkbox" name="genre" value="checkall" onclick="selectAll(this)" checked> 전체 선택
-                                    <br>
-                                    <input type="checkbox" name="genre" value="드라마"  checked> 드라마
-                                    <br>
-                                    <input type="checkbox" name="genre" value="범죄"  checked> 범죄
-                                    <br>
-                                    <input type="checkbox" name="genre" value="코미디"  checked> 코미디
-                                    <br>
-                                    <input type="checkbox" name="genre" value="액션"  checked> 액션
-                                    <br>
-                                    <input type="checkbox" name="genre" value="공포(호러)"  checked> 공포(호러)
-                                    <br>
-                                    <input type="checkbox" name="genre" value="미스터리"  checked> 미스터리
-                                    <br>
-                                    <input type="checkbox" name="genre" value="사극"  checked> 사극
-                                </div>
-    
-                                <div class="col-2">
-                                    <input type="checkbox" name="genre" value="스릴러" checked> 스릴러
-                                    <br>
-                                    <input type="checkbox" name="genre" value="애니메이션"  checked> 애니메이션
-                                    <br>
-                                    <input type="checkbox" name="genre" value="멜로/로맨스"  checked> 멜로/로맨스
-                                    <br>
-                                    <input type="checkbox" name="genre" value="공연"  checked> 공연
-                                    <br>
-                                    <input type="checkbox" name="genre" value="다큐멘터리"  checked> 다큐멘터리
-                                    <br>
-                                    <input type="checkbox" name="genre" value="가족"  checked> 가족
-                                    <br>
-                                    <input type="checkbox" name="genre" value="기타"  checked> 기타
-                                    <br>
-                                    <input type="checkbox" name="genre" value="성인물(에로)"  checked> 성인물(에로)
-                                </div>
-    
+<div class="header">
+    <div class="header-content">
+        <!--로고-->
+        <div class="logo" onClick="location.href='/main'">
+            <h1>BPOSO</h1>
+        </div>
+        <!--검색창-->
+        <div class="search">
+            <form action="SearchMovie" method="post">
+
+                <!--검색창/검색박스-->
+                <div class="s-box">
+                    <input type="text" name="searchName" placeholder="제목, 감독 등으로 찾아보세요">
+                    <button type="submit">
+                        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                    </button>
+                </div>
+
+                <!--검색창/상세검색-->
+                <details>
+                    <summary>상세검색</summary>
+
+                    <!--검색창/상세검색/버튼 누르면 이벤트 발생-->
+                    <div class="s-check">
+                        <div class="s-d-genre">
+                            <div class="col-1">
+                                <h3>장르</h3>
+                                <input type="checkbox" name="genre" value="checkall" onclick="selectAll(this)"
+                                       checked> 전체 선택
+                                <br>
+                                <input type="checkbox" name="genre" value="드라마" checked> 드라마
+                                <br>
+                                <input type="checkbox" name="genre" value="범죄" checked> 범죄
+                                <br>
+                                <input type="checkbox" name="genre" value="코미디" checked> 코미디
+                                <br>
+                                <input type="checkbox" name="genre" value="액션" checked> 액션
+                                <br>
+                                <input type="checkbox" name="genre" value="공포(호러)" checked> 공포(호러)
+                                <br>
+                                <input type="checkbox" name="genre" value="미스터리" checked> 미스터리
+                                <br>
+                                <input type="checkbox" name="genre" value="사극" checked> 사극
                             </div>
-                            <div class="s-d-sort">
-    
-                                <h3>정렬</h3>
-                                <input type="radio" name="sort" value="관객많은순" checked> 관객많은순
+
+                            <div class="col-2">
+                                <input type="checkbox" name="genre" value="스릴러" checked> 스릴러
                                 <br>
-                                <input type="radio" name="sort" value="관객적은순"> 관객적은순
+                                <input type="checkbox" name="genre" value="애니메이션" checked> 애니메이션
                                 <br>
-                                <input type="radio" name="sort" value="별점높은순"> 별점높은순
+                                <input type="checkbox" name="genre" value="멜로/로맨스" checked> 멜로/로맨스
                                 <br>
-                                <input type="radio" name="sort" value="별점낮은순"> 별점낮은순
+                                <input type="checkbox" name="genre" value="공연" checked> 공연
+                                <br>
+                                <input type="checkbox" name="genre" value="다큐멘터리" checked> 다큐멘터리
+                                <br>
+                                <input type="checkbox" name="genre" value="가족" checked> 가족
+                                <br>
+                                <input type="checkbox" name="genre" value="기타" checked> 기타
+                                <br>
+                                <input type="checkbox" name="genre" value="성인물(에로)" checked> 성인물(에로)
                             </div>
+
                         </div>
-                    </details>
-                </form>
-            </div>
-    
-            <div class="nav-area">
-                <span id="show-id" th:text="${session.loginId}" > 아이디</span> <span id="show-texid"> 님</span>
-                <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
-                <a class="login_btn" id="login-text" href="/login">로그인</a>
-                <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
-            </div>
+                        <div class="s-d-sort">
+
+                            <h3>정렬</h3>
+                            <input type="radio" name="sort" value="관객많은순" checked> 관객많은순
+                            <br>
+                            <input type="radio" name="sort" value="관객적은순"> 관객적은순
+                            <br>
+                            <input type="radio" name="sort" value="별점높은순"> 별점높은순
+                            <br>
+                            <input type="radio" name="sort" value="별점낮은순"> 별점낮은순
+                        </div>
+                    </div>
+                </details>
+            </form>
+        </div>
+
+        <div class="nav-area">
+            <span id="show-id" th:text="${session.loginId}"> 아이디</span> <span id="show-texid"> 님</span>
+            <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+            <a class="login_btn" id="login-text" href="/login">로그인</a>
+            <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
         </div>
     </div>
+</div>
 
-    <div class="search-text">
-        <h4>"@검색입력" 검색 결과</h4>
+<div class="search-text">
+    <h4>"@검색입력" 검색 결과</h4>
+</div>
+
+
+<div class="below">
+    <div class="oddeven">
+        <!--테이블 김도연 수정 (2열)-->
+        <table style="width: 100%;">
+            <tr th:each="Movieinfo, iterStat : ${movieList}" th:if="${iterStat.index % 2 == 0}">
+                <td style="width: 45%;">
+                    <span th:text="${Movieinfo.opnDe}">개봉일</span>
+                    <span th:text="${Movieinfo.gradNm}">관람 등급</span>
+                    <br>
+                    <span class="bold-name" colspan=2 th:text="${Movieinfo.movieNm}">영화 제목</span>
+                    <br>
+                    <span colspan=2 th:text="${Movieinfo.drctrNm}">감독명</span>
+                </td>
+                <td th:if="${iterStat.index + 1 &lt; movieList.size()}" style="width: 45%;">
+                    <span th:text="${movieList[iterStat.index + 1].opnDe}">개봉일</span>
+                    <span th:text="${movieList[iterStat.index + 1].gradNm}">관람 등급</span>
+                    <br>
+                    <span class="bold-name" colspan=2 th:text="${movieList[iterStat.index + 1].movieNm}">영화 제목</span>
+                    <br>
+                    <span colspan=2 th:text="${movieList[iterStat.index + 1].drctrNm}">감독명</span>
+                </td>
+            </tr>
+        </table>
     </div>
+</div>
 
 
-    <div class="below">
-
-        <!-- 검색결과 재정렬 홀수부분 -->
-
-        <div class="odd">
-       
-            <table th:each="Movieinfo: ${movieList}">
-                <tr>
-                    <a class="movi-id" th:href="@{review(movieNo=${Movieinfo.no})}"
-                        th:text="${Movieinfo.no}">영화 번호</a>
-                </tr>
-                <tr>
-                    <td th:text="${Movieinfo.opnDe}">개봉일</td>
-                    <td th:text="${Movieinfo.gradNm}">관람 등급</td>
-                </tr>
-                <tr>
-                    <td class="bold-name" colspan=2 th:text="${Movieinfo.movieNm}">영화 이름</td>
-                </tr>
-                <tr>
-                    <td colspan=2 th:text="${Movieinfo.drctrNm}">감독 이름</td>
-                </tr>
-            </table>
-        </div>
-        <!-- 검색결과 재정렬 짝수부분 -->
-
-        <div class="even">
-            <table th:each="Movieinfo: ${movieList}">
-                <tr>
-                    <a class="movi-id" th:href="@{review(movieNo=${Movieinfo.no})}"
-                        th:text="${Movieinfo.no}">영화 번호</a>
-                </tr>
-                <tr>
-                    <td th:text="${Movieinfo.opnDe}">개봉일</td>
-                    <td th:text="${Movieinfo.gradNm}">관람 등급</td>
-                </tr>
-                <tr>
-                    <td class="bold-name" colspan=2 th:text="${Movieinfo.movieNm}">영화 이름</td>
-                </tr>
-                <tr>
-                    <td colspan=2 th:text="${Movieinfo.drctrNm}">감독 이름</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    
 
 </body>
+
 </html>
 <script>
-var loginId = document.getElementById("show-id").innerText;
+    var loginId = document.getElementById("show-id").innerText;
 
-if(loginId !== "n") {
-    document.getElementById("login-text").style.display = "none";
-    document.getElementById("sign-text").style.display = "none";
-}
-else {
-    document.getElementById("show-id").style.display = "none";
-    document.getElementById("show-texid").style.display = "none";
-    document.getElementById("mypageLink").style.display = "none";
-}
+    if (loginId !== "n") {
+        document.getElementById("login-text").style.display = "none";
+        document.getElementById("sign-text").style.display = "none";
+    }
+    else {
+        document.getElementById("show-id").style.display = "none";
+        document.getElementById("show-texid").style.display = "none";
+        document.getElementById("mypageLink").style.display = "none";
+    }
 
-    function selectAll(selectAll)  {
-      const checkboxes
-           = document.getElementsByName('genre');
+    function selectAll(selectAll) {
+        const checkboxes
+            = document.getElementsByName('genre');
 
-      checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAll.checked;
-      })
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAll.checked;
+        })
     }
 
     function submitForm(id) {

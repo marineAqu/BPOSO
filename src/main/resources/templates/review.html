@@ -6,91 +6,90 @@
     <meta charset="UTF-8">
     <title>영화페이지</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
 
-    @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
-
-        *{
-        margin: 0;
-        padding: 0;
-        list-style: 0;
-        text-decoration: none;
-
-        }
-
-        .header{
-        width: 100%;
-        height: 100px;
-        background: #EEEEEE;
-        font-family: 'Gothic A1', sans-serif;
-        font-weight: 200;
-        }
-
-        .header-content{
-        width: 80%;
-        height: 100px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        }
-
-        .logo{
-        flex-grow: 3;
-        margin: 0 0 0 0;
-        font-family: 'Gothic A1', sans-serif;
-        font-weight: 200;
-        font-size: 14px;
-        cursor:pointer;
-        }
-
-        .search{
-        flex-grow: 4;
-        height: 100%;
-        display: flex;
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: 0;
+            text-decoration: none;
 
         }
 
-        .login_btn{
-        font-weight: normal;
-        padding: 10px;
-        background-color: #bcc7cc;
-        color: #FFFFFF;
-        text-decoration-line: none;
-        border-radius: 10px;
+        .header {
+            width: 100%;
+            height: 100px;
+            background: #EEEEEE;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
         }
 
-        .mypageLink{
-        text-decoration-line: none;
-        color: #000000;
+        .header-content {
+            width: 80%;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .s-box{
-        width: 500px;
-        height: 50px;
-        position: relative;
-        margin-top: 20px;
-        align-items: center;
+        .logo {
+            flex-grow: 3;
+            margin: 0 0 0 0;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .search {
+            flex-grow: 4;
+            height: 100%;
+            display: flex;
+
+        }
+
+        .login_btn {
+            font-weight: normal;
+            padding: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            text-decoration-line: none;
+            border-radius: 10px;
+        }
+
+        .mypageLink {
+            text-decoration-line: none;
+            color: #000000;
+        }
+
+        .s-box {
+            width: 500px;
+            height: 50px;
+            position: relative;
+            margin-top: 20px;
+            align-items: center;
         }
 
         .s-box input {
-        width: 100%;
-        height: 45px;
-        border: 1px solid #bbb;
-        border-radius: 8px;
-        padding: 10px 12px;
-        font-size: 15px;
+            width: 100%;
+            height: 45px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 15px;
         }
 
         .s-box button {
-        position: absolute;
-        width:  65px;
-        height: 65px;
-        top: 2px;
-        right: -25px;
-        margin: 0;
-        border: none;
-        background-color:transparent;
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            top: 2px;
+            right: -25px;
+            margin: 0;
+            border: none;
+            background-color: transparent;
         }
 
         .s-box button img {
@@ -105,58 +104,58 @@
         }
 
         summary::marker {
-            display:none;
+            display: none;
             content: "▼";
         }
 
-        details[open]{
-        margin-top: 20px;
-        border-radius:8px;
-        padding: 0;
-        background: #EBF5FB;
-        position: relative;
+        details[open] {
+            margin-top: 20px;
+            border-radius: 8px;
+            padding: 0;
+            background: #EBF5FB;
+            position: relative;
         }
 
-        details[open] summary{
-        color: #4E4FEB;
+        details[open] summary {
+            color: #4E4FEB;
         }
 
-        details[open] summary::marker{
-        color: #4E4FEB;
-        content: "▲";
-        }
-
-
-        .s-check{
-        display: flex;
-        align-items: center;
-        }
-
-        .s-d-genre{
-        bottom: 0;
-        margin: auto;
-        display: flex;
-        align-items: flex-end;
-        padding-bottom: 1em;
-        }
-
-        .s-d-sort{
-        margin: auto auto;
-        }
-
-        .nav-area{
-        flex-grow: 1;
-        margin: auto;
-        font-weight: 700;
-        top: 0;
-        bottom: 0;
-        left: 0;
+        details[open] summary::marker {
+            color: #4E4FEB;
+            content: "▲";
         }
 
 
-        .nav-area a{
-        height: 100%;
-        font-size: 16px;
+        .s-check {
+            display: flex;
+            align-items: center;
+        }
+
+        .s-d-genre {
+            bottom: 0;
+            margin: auto;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 1em;
+        }
+
+        .s-d-sort {
+            margin: auto auto;
+        }
+
+        .nav-area {
+            flex-grow: 1;
+            margin: auto;
+            font-weight: 700;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+
+        .nav-area a {
+            height: 100%;
+            font-size: 16px;
         }
 
         .top {
@@ -196,7 +195,7 @@
             text-align: center;
         }
 
-        li{
+        li {
             width: 100%;
             display: inline-block;
 
@@ -221,7 +220,7 @@
             margin: 0 auto 5px auto;
         }
 
-        .comment-bottom{
+        .comment-bottom {
             width: 75%;
             margin: 0 auto;
             text-align: right;
@@ -375,7 +374,8 @@
             table-layout: fixed;
         }
 
-        .showComment th,td {
+        .showComment th,
+        td {
             padding: 10px;
             text-align: left;
         }
@@ -405,283 +405,317 @@
             width: 75px;
         }
 
-        .aboutComment{
+        .aboutComment {
             white-space: pre-line;
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <div class="header-content">
-            <!--로고-->
-            <div class="logo" onClick="location.href='/main'">
-                <h1>BPOSO</h1>
-            </div>
-            <!--검색창-->
-            <div class="search">
-                <form action="SearchMovie" method="post">
-    
-                    <!--검색창/검색박스-->
-                    <div class="s-box">
-                        <input type="text" name="searchName" placeholder="제목, 감독 등으로 찾아보세요">
-                        <button type="submit">
-                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" >
-                        </button>
+<div class="header">
+    <div class="header-content">
+        <!--로고-->
+        <div class="logo" onClick="location.href='/main'">
+            <h1>BPOSO</h1>
+        </div>
+        <!--검색창-->
+        <div class="search">
+            <form action="SearchMovie" method="post">
+
+                <!--검색창/검색박스-->
+                <div class="s-box">
+                    <input type="text" name="searchName" placeholder="제목, 감독 등으로 찾아보세요">
+                    <button type="submit">
+                        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                    </button>
+                </div>
+
+                <!--검색창/상세검색-->
+                <details>
+                    <summary>상세검색</summary>
+
+                    <!--검색창/상세검색/버튼 누르면 이벤트 발생-->
+                    <div class="s-check">
+                        <div class="s-d-genre">
+                            <div class="col-1">
+                                <h3>장르</h3>
+                                <input type="checkbox" name="genre" value="checkall" onclick="selectAll(this)"
+                                       checked> 전체 선택
+                                <br>
+                                <input type="checkbox" name="genre" value="드라마" checked> 드라마
+                                <br>
+                                <input type="checkbox" name="genre" value="범죄" checked> 범죄
+                                <br>
+                                <input type="checkbox" name="genre" value="코미디" checked> 코미디
+                                <br>
+                                <input type="checkbox" name="genre" value="액션" checked> 액션
+                                <br>
+                                <input type="checkbox" name="genre" value="공포(호러)" checked> 공포(호러)
+                                <br>
+                                <input type="checkbox" name="genre" value="미스터리" checked> 미스터리
+                                <br>
+                                <input type="checkbox" name="genre" value="사극" checked> 사극
+                            </div>
+
+                            <div class="col-2">
+                                <input type="checkbox" name="genre" value="스릴러" checked> 스릴러
+                                <br>
+                                <input type="checkbox" name="genre" value="애니메이션" checked> 애니메이션
+                                <br>
+                                <input type="checkbox" name="genre" value="멜로/로맨스" checked> 멜로/로맨스
+                                <br>
+                                <input type="checkbox" name="genre" value="공연" checked> 공연
+                                <br>
+                                <input type="checkbox" name="genre" value="다큐멘터리" checked> 다큐멘터리
+                                <br>
+                                <input type="checkbox" name="genre" value="가족" checked> 가족
+                                <br>
+                                <input type="checkbox" name="genre" value="기타" checked> 기타
+                                <br>
+                                <input type="checkbox" name="genre" value="성인물(에로)" checked> 성인물(에로)
+                            </div>
+
+                        </div>
+                        <div class="s-d-sort">
+
+                            <h3>정렬</h3>
+                            <input type="radio" name="sort" value="관객많은순" checked> 관객많은순
+                            <br>
+                            <input type="radio" name="sort" value="관객적은순"> 관객적은순
+                            <br>
+                            <input type="radio" name="sort" value="별점높은순"> 별점높은순
+                            <br>
+                            <input type="radio" name="sort" value="별점낮은순"> 별점낮은순
+                        </div>
                     </div>
-    
-                    <!--검색창/상세검색-->
-                    <details>
-                        <summary>상세검색</summary>
-    
-                        <!--검색창/상세검색/버튼 누르면 이벤트 발생-->
-                        <div class="s-check">
-                            <div class="s-d-genre">
-                                <div class="col-1">
-                                    <h3>장르</h3>
-                                    <input type="checkbox" name="genre" value="checkall" onclick="selectAll(this)" checked> 전체 선택
-                                    <br>
-                                    <input type="checkbox" name="genre" value="드라마"  checked> 드라마
-                                    <br>
-                                    <input type="checkbox" name="genre" value="범죄"  checked> 범죄
-                                    <br>
-                                    <input type="checkbox" name="genre" value="코미디"  checked> 코미디
-                                    <br>
-                                    <input type="checkbox" name="genre" value="액션"  checked> 액션
-                                    <br>
-                                    <input type="checkbox" name="genre" value="공포(호러)"  checked> 공포(호러)
-                                    <br>
-                                    <input type="checkbox" name="genre" value="미스터리"  checked> 미스터리
-                                    <br>
-                                    <input type="checkbox" name="genre" value="사극"  checked> 사극
-                                </div>
-    
-                                <div class="col-2">
-                                    <input type="checkbox" name="genre" value="스릴러" checked> 스릴러
-                                    <br>
-                                    <input type="checkbox" name="genre" value="애니메이션"  checked> 애니메이션
-                                    <br>
-                                    <input type="checkbox" name="genre" value="멜로/로맨스"  checked> 멜로/로맨스
-                                    <br>
-                                    <input type="checkbox" name="genre" value="공연"  checked> 공연
-                                    <br>
-                                    <input type="checkbox" name="genre" value="다큐멘터리"  checked> 다큐멘터리
-                                    <br>
-                                    <input type="checkbox" name="genre" value="가족"  checked> 가족
-                                    <br>
-                                    <input type="checkbox" name="genre" value="기타"  checked> 기타
-                                    <br>
-                                    <input type="checkbox" name="genre" value="성인물(에로)"  checked> 성인물(에로)
-                                </div>
-    
-                            </div>
-                            <div class="s-d-sort">
-    
-                                <h3>정렬</h3>
-                                <input type="radio" name="sort" value="관객많은순" checked> 관객많은순
-                                <br>
-                                <input type="radio" name="sort" value="관객적은순"> 관객적은순
-                                <br>
-                                <input type="radio" name="sort" value="별점높은순"> 별점높은순
-                                <br>
-                                <input type="radio" name="sort" value="별점낮은순"> 별점낮은순
-                            </div>
-                        </div>
-                    </details>
-                </form>
-            </div>
-    
-            <div class="nav-area">
-    
-                <span id="show-id" th:text="${session.loginId}" > 아이디</span> <span id="show-texid"> 님</span>
-                <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
-                <a class="login_btn" id="login-text" href="/login">로그인</a>
-                <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
-                <!--<a sec:authorize="isAuthenticated()" id="login-text" href="/login">로그인</a>-->
-            </div>
+                </details>
+            </form>
+        </div>
+
+        <div class="nav-area">
+
+            <span id="show-id" th:text="${session.loginId}"> 아이디</span> <span id="show-texid"> 님</span>
+            <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+            <a class="login_btn" id="login-text" href="/login">로그인</a>
+            <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
+            <!--<a sec:authorize="isAuthenticated()" id="login-text" href="/login">로그인</a>-->
         </div>
     </div>
+</div>
 
-    <div class="top">
+<div class="top">
 
-        <div class="poster">
-            <img src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201602/19/htm_20160219171437117902.jpg"
-                alt="포스터">
-        </div>
-        <div class="movie_1">
-            <!--(여기다가 넣을것들~ 영화제목 감독 출연 개봉년도)-->
-            <!--<p id="movieName">영화 제목</p>-->
-            <span id="movieName" th:text="${movNm}">제목</span><br>
-            <br>
-            <span> 감독: </span>
-            <span th:text="${drctr}"></span><br>
-            <span> 개봉연도: </span>
-            <span th:text="${opd}"></span>
+    <div class="poster">
+        <!--김도연 수정: 영화 포스터 이미지 삽입-->
+        <img id="posterURL" src="image/loading.png" alt="포스터">
+        <!--<img th:src="${posterPath}" alt="포스터">-->
+    </div>
+    <div class="movie_1">
+        <!--(여기다가 넣을것들~ 영화제목 감독 출연 개봉년도)-->
+        <!--<p id="movieName">영화 제목</p>-->
+        <span id="movieName" th:text="${movNm}">제목</span><br>
+        <br>
+        <span> 감독: </span>
+        <span th:text="${drctr}"></span><br>
+        <span> 개봉연도: </span>
+        <span th:text="${opd}"></span>
 
-            <!--평점과 보고싶어요-->
-            <p>평점: ★(평점넣기)</p>
-            <br>
+        <!--평점과 보고싶어요-->
+        <p>평점: ★(평점넣기)</p>
+        <br>
 
-            <div class="www">
-                <button class="circle-button" onclick="this.classList.toggle('clicked')" align="middle">
-                </button>
-                <span id="like"><br>&nbsp; 보고싶어요</span>
-            </div>
+        <div class="www">
+            <button class="circle-button" onclick="this.classList.toggle('clicked')" align="middle">
+            </button>
+            <span id="like"><br>&nbsp; 보고싶어요</span>
         </div>
     </div>
+</div>
 
 
-    <div class="input-review">
-        <ul class="comment" id="subPorm">
-            <li class="comment-form">
-                <!--<form id="commentFrm">-->
-                <form class="PostReview" action="PostReview" method="post">
-                    <input type="hidden" name="no" th:value="${no}">
-                    <div class="comment-top">
-                        <!--왼쪽 아이디 띄우기-->
-                        <h4><span id="myid">본인아이디:</span></h4>
-                        <p th:text="${session.loginId}"></p>
-                        <!--중간 별점 재기-->
-                        <div class="starpoint_wrap">
-                            <div class="starpoint_box">
-                                <label for="starpoint_1" class="label_star" title="0.5"><span
-                                        class="blind">0.5점></span></label>
-                                <label for="starpoint_2" class="label_star" title="1.0"><span
-                                        class="blind">1점></span></label>
-                                <label for="starpoint_3" class="label_star" title="1.5"><span
-                                        class="blind">1.5점></span></label>
-                                <label for="starpoint_4" class="label_star" title="2.0"><span
-                                        class="blind">2점></span></label>
-                                <label for="starpoint_5" class="label_star" title="2.5"><span
-                                        class="blind">2.5점></span></label>
-                                <label for="starpoint_6" class="label_star" title="3.0"><span
-                                        class="blind">3점></span></label>
-                                <label for="starpoint_7" class="label_star" title="3.5"><span
-                                        class="blind">3.5점></span></label>
-                                <label for="starpoint_8" class="label_star" title="4.0"><span
-                                        class="blind">4점></span></label>
-                                <label for="starpoint_9" class="label_star" title="4.5"><span
-                                        class="blind">4.5점></span></label>
-                                <label for="starpoint_10" class="label_star" title="5.0"><span
-                                        class="blind">5점></span></label>
-                                <input type="radio" name="starpoint" id="starpoint_1" value="0.5" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_2" value="1.0" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_3" value="1.5" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_4" value="2.0" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_5" value="2.5" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_6" value="3.0" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_7" value="3.5" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_8" value="4.0" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_9" value="4.5" class="star_radio">
-                                <input type="radio" name="starpoint" id="starpoint_10" value="5.0" class="star_radio">
-                                <span class="starpoint_bg"></span>
-                            </div>
+<div class="input-review">
+    <ul class="comment" id="subPorm">
+        <li class="comment-form">
+            <!--<form id="commentFrm">-->
+            <form class="PostReview" action="PostReview" method="post">
+                <input type="hidden" name="no" th:value="${no}">
+                <div class="comment-top">
+                    <!--왼쪽 아이디 띄우기-->
+                    <h4><span id="myid">본인아이디:</span></h4>
+                    <p th:text="${session.loginId}"></p>
+                    <!--중간 별점 재기-->
+                    <div class="starpoint_wrap">
+                        <div class="starpoint_box">
+                            <label for="starpoint_1" class="label_star" title="0.5"><span
+                                    class="blind">0.5점></span></label>
+                            <label for="starpoint_2" class="label_star" title="1.0"><span
+                                    class="blind">1점></span></label>
+                            <label for="starpoint_3" class="label_star" title="1.5"><span
+                                    class="blind">1.5점></span></label>
+                            <label for="starpoint_4" class="label_star" title="2.0"><span
+                                    class="blind">2점></span></label>
+                            <label for="starpoint_5" class="label_star" title="2.5"><span
+                                    class="blind">2.5점></span></label>
+                            <label for="starpoint_6" class="label_star" title="3.0"><span
+                                    class="blind">3점></span></label>
+                            <label for="starpoint_7" class="label_star" title="3.5"><span
+                                    class="blind">3.5점></span></label>
+                            <label for="starpoint_8" class="label_star" title="4.0"><span
+                                    class="blind">4점></span></label>
+                            <label for="starpoint_9" class="label_star" title="4.5"><span
+                                    class="blind">4.5점></span></label>
+                            <label for="starpoint_10" class="label_star" title="5.0"><span
+                                    class="blind">5점></span></label>
+                            <input type="radio" name="starpoint" id="starpoint_1" value="0.5" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_2" value="1.0" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_3" value="1.5" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_4" value="2.0" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_5" value="2.5" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_6" value="3.0" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_7" value="3.5" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_8" value="4.0" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_9" value="4.5" class="star_radio">
+                            <input type="radio" name="starpoint" id="starpoint_10" value="5.0" class="star_radio">
+                            <span class="starpoint_bg"></span>
                         </div>
+                    </div>
 
-                        <span class="bt">
+                    <span class="bt">
                             <button class="corr-bt" type="#">수정</button>
                             <button class="reset-bt" type="reset">삭제</button>
                         </span>
-                    </div>
+                </div>
 
-                    <span class="ps_box">
+                <span class="ps_box">
                         <textarea placeholder="리뷰를 적어보세요" class="int" name="reviewContent"></textarea>
                     </span>
-                    <br>
-                    <!--<input type="submit" class="btn" onclick="reviewPostFun(event)" value="등록">-->
-                    <div class="comment-bottom">
-                        <button type="button" onclick="reviewPostFun(event)">등록</button>
-                    </div>
-                </form>
-                <!--</form>-->
-            </li>
-        </ul>
+                <br>
+                <!--<input type="submit" class="btn" onclick="reviewPostFun(event)" value="등록">-->
+                <div class="comment-bottom">
+                    <button type="button" onclick="reviewPostFun(event)">등록</button>
+                </div>
+            </form>
+            <!--</form>-->
+        </li>
+    </ul>
 
-        <div class="showComment">
-            <table th:each="Review: ${reviewList}">
-                <thead>
-                    <tr>
-                        <th> 평점 </th>
-                        <th> 아이디 </th>
-                        <th> 내용</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <!-- 별점 숫자지???
-                    이거 switch문이니까 별점대로 th:case 수정해도됨 -->
-                            <th:block th:switch="${Review.rate}">
-                                <div class="star-review-back">
-                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                </div>
-                                <span th:case="0">
+    <div class="showComment">
+        <table th:each="Review: ${reviewList}">
+            <thead>
+            <tr>
+                <th> 평점 </th>
+                <th> 아이디 </th>
+                <th> 내용</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <!-- 별점 숫자지???
+            이거 switch문이니까 별점대로 th:case 수정해도됨 -->
+                    <th:block th:switch="${Review.rate}">
+                        <div class="star-review-back">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <span th:case="0">
                                     <div class="star-review-front" style="width:0px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="0.5">
+                        <span th:case="0.5">
                                     <div class="star-review-front" style="width:8px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="1">
+                        <span th:case="1">
                                     <div class="star-review-front" style="width:15px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="1.5">
+                        <span th:case="1.5">
                                     <div class="star-review-front" style="width:23px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="2">
+                        <span th:case="2">
                                     <div class="star-review-front" style="width:30px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="2.5">
+                        <span th:case="2.5">
                                     <div class="star-review-front" style="width:38px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="3">
+                        <span th:case="3">
                                     <div class="star-review-front" style="width:45px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="3.5">
+                        <span th:case="3.5">
                                     <div class="star-review-front" style="width:53px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="4">
+                        <span th:case="4">
                                     <div class="star-review-front" style="width:60px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="4.5">
+                        <span th:case="4.5">
                                     <div class="star-review-front" style="width:68px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                                <span th:case="5">
+                        <span th:case="5">
                                     <div class="star-review-front" style="width:75px">
                                         <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                     </div>
                                 </span>
-                            </th:block>
-                        </td>
-                        <td th:text="${Review.userId}">아이디</td>
-                        <td class="aboutComment" th:text="${Review.reviewCon}">댓글내용</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
+                    </th:block>
+                </td>
+                <td th:text="${Review.userId}">아이디</td>
+                <td class="aboutComment" th:text="${Review.reviewCon}">댓글내용</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <!--리뷰 내용, 별점 입력하지 않으면 넘어가지 않도록 해야 한다-->
-    <script>
+
+</div>
+<!--리뷰 내용, 별점 입력하지 않으면 넘어가지 않도록 해야 한다-->
+<script>
+        //포스터 가져오는 로직
+        let movie_title = document.getElementById("movieName").innerText;
+
+        movie_title = movie_title.replace(/\:/g, '');
+        movie_title = movie_title.replace(/\s/g, '');
+
+        let url = 'https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=K4HT80T1S6JR6O193Z1T&detail=Y&listCount=1&title='
+        movie_title = '"' + movie_title + '"';
+        url += movie_title;
+
+        fetch(url)
+            .then((response) => response.json()) // Fetch 응답 객체를 받아옴
+            .then((json) => {
+                //console.log(json);
+                let postersValue = json.Data[0].Result[0].posters;
+                if (postersValue.includes('|')) {
+                    // '|' 문자가 있다면(포스터가 여러개 있으면) 첫 번째 '|' 이전까지의 부분 문자열 추출
+                    postersValue = postersValue.split('|')[0];
+                    console.log(postersValue);
+                } else {
+                    // '|' 문자가 없다면(포스터가 하나이므로) 원래 문자열 그대로 사용
+                    console.log(postersValue);
+                }
+                document.getElementById("posterURL").src = postersValue;
+            })
+            .catch((error) => {
+                console.error('데이터를 가져오는 중 오류 발생:', error);
+            });
+
+
+
+
         var loginId = document.getElementById("show-id").innerText;
 
         if (loginId !== "n") {

@@ -223,6 +223,10 @@
             text-align: left;
         }
 
+        movieTd {
+            width: 50%;
+        }
+
         .bold-name {
             color: #000000;
             font-weight: 700;
@@ -331,21 +335,25 @@
         <!--테이블 김도연 수정 (2열)-->
         <table style="width: 100%;">
             <tr th:each="Movieinfo, iterStat : ${movieList}" th:if="${iterStat.index % 2 == 0}">
-                <td style="width: 45%;">
+                <td class="movieTd">
+                    <div style="cursor:pointer;" th:onclick="goToReview([[${Movieinfo.no}]])">
                     <span th:text="${Movieinfo.opnDe}">개봉일</span>
                     <span th:text="${Movieinfo.gradNm}">관람 등급</span>
                     <br>
                     <span class="bold-name" colspan=2 th:text="${Movieinfo.movieNm}">영화 제목</span>
                     <br>
                     <span colspan=2 th:text="${Movieinfo.drctrNm}">감독명</span>
+                    </div>
                 </td>
-                <td th:if="${iterStat.index + 1 &lt; movieList.size()}" style="width: 45%;">
+                <td th:if="${iterStat.index + 1 &lt; movieList.size()}" class="movieTd">
+                    <div style="cursor:pointer;" th:onclick="goToReview([[${movieList[iterStat.index + 1].no}]])">
                     <span th:text="${movieList[iterStat.index + 1].opnDe}">개봉일</span>
                     <span th:text="${movieList[iterStat.index + 1].gradNm}">관람 등급</span>
                     <br>
-                    <span class="bold-name" colspan=2 th:text="${movieList[iterStat.index + 1].movieNm}">영화 제목</span>
+                    <span class="bold-name" colspan=2 th:text="${movieList[iterStat.index + 1].movieNm}" th:herf="@{/review(movieNo=${movieList[iterStat.index + 1].no})}">영화 제목</span>
                     <br>
                     <span colspan=2 th:text="${movieList[iterStat.index + 1].drctrNm}">감독명</span>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -359,6 +367,7 @@
 </html>
 <script>
     var loginId = document.getElementById("show-id").innerText;
+    var bookNo;
 
     if (loginId !== "n") {
         document.getElementById("login-text").style.display = "none";
@@ -381,6 +390,11 @@
 
     function submitForm(id) {
         var reviewPageUrl = "/review?movieNo=" + id;
+        window.location.href = reviewPageUrl;
+    }
+
+    function goToReview(movieNo){
+        var reviewPageUrl = "/review?movieNo=" + movieNo;
         window.location.href = reviewPageUrl;
     }
 </script>

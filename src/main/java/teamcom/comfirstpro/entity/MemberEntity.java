@@ -1,8 +1,10 @@
 package teamcom.comfirstpro.entity;
-import teamcom.comfirstpro.DTO.MemberDTO;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import jakarta.persistence.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import teamcom.comfirstpro.DTO.MemberDTO;
 
 @Entity
 @Setter
@@ -24,10 +26,10 @@ public class MemberEntity {
 
 
 
-    public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
+    public static MemberEntity toMemberEntity(MemberDTO memberDTO, PasswordEncoder passwordEncoder) {
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setUsername(memberDTO.getUsername());
-        memberEntity.setPassword(memberDTO.getPassword());
+        memberEntity.setPassword(passwordEncoder.encode(memberDTO.getPassword())); //비밀번호 암호화
         memberEntity.setMemName(memberDTO.getMemName());
         return memberEntity;
     }

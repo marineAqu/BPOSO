@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import teamcom.comfirstpro.DTO.MemberDTO;
 
+
 @Entity
 @Setter
 @Getter
@@ -19,18 +20,17 @@ public class MemberEntity {
     private String username; //아이디
 
     @Column
-    private String memName; //이름
+    private String nickname; //이름
 
     @Column
     private String password;
-
 
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO, PasswordEncoder passwordEncoder) {
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setUsername(memberDTO.getUsername());
         memberEntity.setPassword(passwordEncoder.encode(memberDTO.getPassword())); //비밀번호 암호화
-        memberEntity.setMemName(memberDTO.getMemName());
+        memberEntity.setNickname(memberDTO.getNickname());
         return memberEntity;
     }
 }

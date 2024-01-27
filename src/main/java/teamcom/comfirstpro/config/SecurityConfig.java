@@ -1,4 +1,4 @@
-package teamcom.comfirstpro;
+package teamcom.comfirstpro.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +17,14 @@ public class SecurityConfig {
         http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests //처음 뜨는 시큐리티 로그인 화면 해제
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .csrf(csrf -> csrf.disable()); // CSRF 보호 비활성화
+
+        http.formLogin(login -> login
+                        .loginPage("/login") //보안이 필요한 페이지에 접근 시 login이라는 로그인 페이지에 리다이렉트
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/login_process") //로그인이 수행되는 url
+                        .defaultSuccessUrl("/") //성공 시 리다이렉트 될 기본주소
+                        .failureForwardUrl("/login")); //실패 시 리다이렉트 될 기본주소
         return http.build();
     }
 

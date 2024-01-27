@@ -54,27 +54,6 @@
             border-radius: 4px;
         }
 
-        .form button:hover,
-        .form button:active,
-        .form button:focus {
-            background: #B2CCFF;
-        }
-
-        .form .message {
-            margin: 15px 0 0;
-            color: #b3b3b3;
-            font-size: 12px;
-        }
-
-        .form .message a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        .form .register-form {
-            display: none;
-        }
-
         span {
             color: red;
         }
@@ -89,15 +68,15 @@
     <div class="form">
         <h1 class="logo">회원가입</h1>
         <form class="login-form" action="sign-up" method="post" modelAttribute="memberDTO">
-            <input type="text" name="nickname" required="required" th:value="${memberDTO?.nickname}" placeholder="이름" />
-            <span th:text="${valid_nickname}">오류에대해</span>
+            <input type="text" name="nickname" required="required" th:value="${memberDTO?.nickname}" placeholder="이름"/>
+            <span th:text="${valid_nickname}"></span>
 
-            <input type="text" name="username" required="required" minlength="4" th:value="${memberDTO?.username}" placeholder="아이디" />
-            <span th:text="${valid_username}">오류에대해2</span>
+            <input type="text" name="username" required="required" minlength="4" th:value="${memberDTO?.username}" placeholder="아이디"/>
+            <span th:text="${valid_username}"></span>
 
             <input type="password" name="password" required="required" th:value="${memberDTO?.password}" minlength="4"
-                   placeholder="비밀번호" />
-            <span th:text="${valid_password}">오류에대해3</span>
+                   placeholder="비밀번호"/>
+            <span th:text="${valid_password}"></span>
             <br>
             <button type="submit">회원가입</button>
         </form>

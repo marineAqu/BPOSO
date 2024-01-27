@@ -52,4 +52,15 @@ public class ReviewService {
         return reviewDTOList;
     }
 
+    public Double AvgReview(Long movieNo) {
+        List<ReviewEntity> movies = reviewRepository.findByMovNo(movieNo);
+        double avgReview = 0;
+
+        for (ReviewEntity movie : movies) {
+            avgReview += movie.getRate();
+        }
+
+        if (movies.size() > 0) return avgReview / movies.size();
+        else return -1.0; //후기가 없을 경우 -1.0로 표시
+    }
 }

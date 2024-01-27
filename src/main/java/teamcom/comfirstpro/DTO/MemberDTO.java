@@ -36,6 +36,7 @@ public class MemberDTO {
         memberDTO.setUsername(memberEntity.getUsername());
         memberDTO.setPassword(memberEntity.getPassword());
         memberDTO.setNickname(memberEntity.getNickname());
+        memberDTO.setRole("user");
         return memberDTO;
     }
 

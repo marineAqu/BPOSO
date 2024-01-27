@@ -25,6 +25,8 @@ public class MemberEntity {
     @Column
     private String password;
 
+    @Column
+    private String role;
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO, PasswordEncoder passwordEncoder) {
         MemberEntity memberEntity = new MemberEntity();

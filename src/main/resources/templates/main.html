@@ -341,22 +341,8 @@
 
 </html>
 <script>
-    var loginId = document.getElementById("show-id").innerText;
-
-    if (loginId !== "n") {
-        document.getElementById("login-text").style.display = "none";
-        document.getElementById("sign-text").style.display = "none";
-    }
-    else {
-        document.getElementById("show-id").style.display = "none";
-        document.getElementById("show-texid").style.display = "none";
-        document.getElementById("mypageLink").style.display = "none";
-    }
-
-
     function selectAll(selectAll) {
-        const checkboxes
-            = document.getElementsByName('genre');
+        const checkboxes = document.getElementsByName('genre');
 
         checkboxes.forEach((checkbox) => {
             checkbox.checked = selectAll.checked;

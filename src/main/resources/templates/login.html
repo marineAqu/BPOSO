@@ -68,52 +68,6 @@
   background: #B2CCFF;
 }
 
-.form .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
-}
-.form .message a {
-  color: #4CAF50;
-  text-decoration: none;
-}
-.form .register-form {
-  display: none;
-}
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.container:before, .container:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-.container .info {
-  margin: 50px auto;
-  text-align: center;
-}
-.container .info h1 {
-  margin: 0 0 15px;
-  padding: 0;
-  font-size: 36px;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-.container .info span {
-  color: #4d4d4d;
-  font-size: 12px;
-}
-.container .info span a {
-  color: #000000;
-  text-decoration: none;
-}
-.container .info span .fa {
-  color: #EF3B3A;
-}
-
 </style>
 </head>
 
@@ -122,23 +76,15 @@
 
     <div class="form">
         <h1 class="logo">로그인</h1>
-        <input type="hidden" name="returnUrl" th:value="${returnUrl}" />
-        <form class="login-form" action="login" method="post">
+        <form class="login-form" action="/login_process" method="post">
             <input type="text" name="username" placeholder="아이디를 입력하세요."/>
             <input type="password" name="password" placeholder="비밀번호를 입력하세요."/>
             <div>
-                <button class="left-button" name="signupBtn" onclick="handleSignupClick(event)">회원가입</button>
+                <button class="left-button" name="signupBtn" onclick="location.href='sign-up'">회원가입</button>
                 <button class="right-button" type="submit">로그인</button>
             </div>
         </form>
     </div>
 </div>
 </body>
-<script>
-  function handleSignupClick(event) {
-    event.preventDefault();
-    location.href = 'sign-up';
-  }
-</script>
 </html>
-

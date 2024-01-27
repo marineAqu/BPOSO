@@ -521,7 +521,12 @@
         <span th:text="${opd}"></span>
 
         <!--평점과 보고싶어요-->
-        <p>평점: ★(평점넣기)</p>
+        <!--평점 김도연 작성-->
+        <p>
+            <span>평점: ★</span>
+            <span th:if="${rateAvg == -1.0}">아직 등록된 리뷰가 없습니다.</span>
+            <span th:unless="${rateAvg == -1.0}" th:text="'★ '+${rateAvg}"></span>
+        </p>
         <br>
 
         <div class="www">

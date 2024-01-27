@@ -1,93 +1,94 @@
 <!DOCTYPE html>
 <html lang="ko-KR" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>main</title>
     <style>
-  @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
 
-        *{
-        margin: 0;
-        padding: 0;
-        list-style: 0;
-        text-decoration: none;
-
-        }
-
-        .header{
-        width: 100%;
-        height: 100px;
-        background: #EEEEEE;
-        font-family: 'Gothic A1', sans-serif;
-        font-weight: 200;
-        }
-
-        .header-content{
-        width: 80%;
-        height: 100px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        }
-
-        .logo{
-        flex-grow: 3;
-        margin: 0 0 0 0;
-        font-family: 'Gothic A1', sans-serif;
-        font-weight: 200;
-        font-size: 14px;
-        cursor:pointer;
-        }
-
-        .search{
-        flex-grow: 4;
-        height: 100%;
-        display: flex;
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: 0;
+            text-decoration: none;
 
         }
 
-        .login_btn{
-        font-weight: normal;
-        padding: 10px;
-        background-color: #bcc7cc;
-        color: #FFFFFF;
-        text-decoration-line: none;
-        border-radius: 10px;
+        .header {
+            width: 100%;
+            height: 100px;
+            background: #EEEEEE;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
         }
 
-        .mypageLink{
-        text-decoration-line: none;
-        color: #000000;
+        .header-content {
+            width: 80%;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .s-box{
-        width: 500px;
-        height: 50px;
-        position: relative;
-        margin-top: 20px;
-        align-items: center;
+        .logo {
+            flex-grow: 3;
+            margin: 0 0 0 0;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .search {
+            flex-grow: 4;
+            height: 100%;
+            display: flex;
+
+        }
+
+        .login_btn {
+            font-weight: normal;
+            padding: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            text-decoration-line: none;
+            border-radius: 10px;
+        }
+
+        .mypageLink {
+            text-decoration-line: none;
+            color: #000000;
+        }
+
+        .s-box {
+            width: 500px;
+            height: 50px;
+            position: relative;
+            margin-top: 20px;
+            align-items: center;
         }
 
         .s-box input {
-        width: 100%;
-        height: 45px;
-        border: 1px solid #bbb;
-        border-radius: 8px;
-        padding: 10px 12px;
-        font-size: 15px;
+            width: 100%;
+            height: 45px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 15px;
         }
 
         .s-box button {
-        position: absolute;
-        width:  65px;
-        height: 65px;
-        top: 2px;
-        right: -25px;
-        margin: 0;
-        border: none;
-        background-color:transparent;
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            top: 2px;
+            right: -25px;
+            margin: 0;
+            border: none;
+            background-color: transparent;
         }
 
         .s-box button img {
@@ -102,94 +103,91 @@
         }
 
         summary::marker {
-            display:none;
+            display: none;
             content: "▼";
         }
 
-        details[open]{
-        margin-top: 20px;
-        border-radius:8px;
-        padding: 0;
-        background: #EBF5FB;
-        position: relative;
+        details[open] {
+            margin-top: 20px;
+            border-radius: 8px;
+            padding: 0;
+            background: #EBF5FB;
+            position: relative;
         }
 
-        details[open] summary{
-        color: #4E4FEB;
+        details[open] summary {
+            color: #4E4FEB;
         }
 
-        details[open] summary::marker{
-        color: #4E4FEB;
-        content: "▲";
-        }
-
-
-        .s-check{
-        display: flex;
-        align-items: center;
-        }
-
-        .s-d-genre{
-        bottom: 0;
-        margin: auto;
-        display: flex;
-        align-items: flex-end;
-        padding-bottom: 1em;
-        }
-
-        .s-d-sort{
-        margin: auto auto;
-        }
-
-        .nav-area{
-        flex-grow: 1;
-        margin: auto;
-        font-weight: 700;
-        top: 0;
-        bottom: 0;
-        left: 0;
+        details[open] summary::marker {
+            color: #4E4FEB;
+            content: "▲";
         }
 
 
-        .nav-area a{
-        height: 100%;
-        font-size: 16px;
+        .s-check {
+            display: flex;
+            align-items: center;
         }
 
-        .mid{
-        width: 80%;
-        height: 600px;
-        margin: 60px auto;
-        display: flex;
-        flex-direction: column;
-        font-size: 20px;
-        font-family: 'Gothic A1', sans-serif;
-        font-weight: 700;
-        
+        .s-d-genre {
+            bottom: 0;
+            margin: auto;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 1em;
         }
 
-        .audB{
+        .s-d-sort {
+            margin: auto auto;
+        }
+
+        .nav-area {
+            flex-grow: 1;
+            margin: auto;
+            font-weight: 700;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+
+        .nav-area a {
+            height: 100%;
+            font-size: 16px;
+        }
+
+        .mid {
+            width: 80%;
+            height: 600px;
+            margin: 60px auto;
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 700;
+
+        }
+
+        .audB {
             display: flex;
             flex-direction: row;
             margin: 10px 0 0 0;
         }
 
-        .audB > *{
+        .audB>* {
             width: 200px;
             height: 400px;
             font-size: 17px;
             font-weight: 500;
         }
 
-        .audB > * img{
+        .audB>* img {
             width: 150px;
         }
-
-       
-
-
     </style>
 </head>
+
 <body>
 <div class="header">
     <div class="header-content">
@@ -205,7 +203,7 @@
                 <div class="s-box">
                     <input type="text" name="searchName" placeholder="제목, 감독 등으로 찾아보세요">
                     <button type="submit">
-                        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" >
+                        <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
                     </button>
                 </div>
 
@@ -218,39 +216,40 @@
                         <div class="s-d-genre">
                             <div class="col-1">
                                 <h3>장르</h3>
-                                <input type="checkbox" name="genre" value="checkall" onclick="selectAll(this)" checked> 전체 선택
+                                <input type="checkbox" name="genre" value="checkall" onclick="selectAll(this)"
+                                       checked> 전체 선택
                                 <br>
-                                <input type="checkbox" name="genre" value="드라마"  checked> 드라마
+                                <input type="checkbox" name="genre" value="드라마" checked> 드라마
                                 <br>
-                                <input type="checkbox" name="genre" value="범죄"  checked> 범죄
+                                <input type="checkbox" name="genre" value="범죄" checked> 범죄
                                 <br>
-                                <input type="checkbox" name="genre" value="코미디"  checked> 코미디
+                                <input type="checkbox" name="genre" value="코미디" checked> 코미디
                                 <br>
-                                <input type="checkbox" name="genre" value="액션"  checked> 액션
+                                <input type="checkbox" name="genre" value="액션" checked> 액션
                                 <br>
-                                <input type="checkbox" name="genre" value="공포(호러)"  checked> 공포(호러)
+                                <input type="checkbox" name="genre" value="공포(호러)" checked> 공포(호러)
                                 <br>
-                                <input type="checkbox" name="genre" value="미스터리"  checked> 미스터리
+                                <input type="checkbox" name="genre" value="미스터리" checked> 미스터리
                                 <br>
-                                <input type="checkbox" name="genre" value="사극"  checked> 사극
+                                <input type="checkbox" name="genre" value="사극" checked> 사극
                             </div>
 
                             <div class="col-2">
                                 <input type="checkbox" name="genre" value="스릴러" checked> 스릴러
                                 <br>
-                                <input type="checkbox" name="genre" value="애니메이션"  checked> 애니메이션
+                                <input type="checkbox" name="genre" value="애니메이션" checked> 애니메이션
                                 <br>
-                                <input type="checkbox" name="genre" value="멜로/로맨스"  checked> 멜로/로맨스
+                                <input type="checkbox" name="genre" value="멜로/로맨스" checked> 멜로/로맨스
                                 <br>
-                                <input type="checkbox" name="genre" value="공연"  checked> 공연
+                                <input type="checkbox" name="genre" value="공연" checked> 공연
                                 <br>
-                                <input type="checkbox" name="genre" value="다큐멘터리"  checked> 다큐멘터리
+                                <input type="checkbox" name="genre" value="다큐멘터리" checked> 다큐멘터리
                                 <br>
-                                <input type="checkbox" name="genre" value="가족"  checked> 가족
+                                <input type="checkbox" name="genre" value="가족" checked> 가족
                                 <br>
-                                <input type="checkbox" name="genre" value="기타"  checked> 기타
+                                <input type="checkbox" name="genre" value="기타" checked> 기타
                                 <br>
-                                <input type="checkbox" name="genre" value="성인물(에로)"  checked> 성인물(에로)
+                                <input type="checkbox" name="genre" value="성인물(에로)" checked> 성인물(에로)
                             </div>
 
                         </div>
@@ -269,52 +268,65 @@
                 </details>
             </form>
         </div>
-
-        <div class="nav-area">
-
-            <span id="show-id" th:text="${session.loginId}" > 아이디</span> <span id="show-texid"> 님</span>
+        <!--<a sec:authorize="isAuthenticated()" id="login-text" href="/login">로그인</a>-->
+        <!--
+    <div class="nav-area">
+        <span id="show-id" th:text="${session.loginId}" > 아이디</span> <span id="show-texid"> 님</span>
+        <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+        <a class="login_btn" id="login-text" href="/login">로그인</a>
+        <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
+    </div>
+    -->
+        <th:block th:if="${loginId}" class="nav-area">
+            <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-texid"> 님</span>
             <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+        </th:block>
+        <th:block th:unless="${loginId}" class="nav-area">
             <a class="login_btn" id="login-text" href="/login">로그인</a>
             <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
-            <!--<a sec:authorize="isAuthenticated()" id="login-text" href="/login">로그인</a>-->
-        </div>
+        </th:block>
     </div>
 </div>
 
 <div class="mid">
     <h1>관객순 Best</h1>
     <div class="audB">
-        <div class="one"> 
+        <div class="one">
             <a href="#">
-                <img src="https://i.namu.wiki/i/W9-BvWLJ1wJOLLOUldPw1Px_TeVnr2_5v_ODtYZSooI0NYAvAY1hXoabVa8MscXl6C_fJq-oUoCoDiLwig54PQ.webp" alt="">
+                <img src="https://i.namu.wiki/i/W9-BvWLJ1wJOLLOUldPw1Px_TeVnr2_5v_ODtYZSooI0NYAvAY1hXoabVa8MscXl6C_fJq-oUoCoDiLwig54PQ.webp"
+                     alt="">
             </a>
             <p>1등영화</p>
             <p>★ 평점</p>
         </div>
-        <div class="two"> 
+        <div class="two">
             <a href="#">
-                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp" alt="">
+                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp"
+                     alt="">
             </a>
             <p>2등영화</p>
             <p>★ 평점</p>
         </div>
-        <div class="three"> 
+        <div class="three">
             <a href="#">
-                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp" alt="">
+                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp"
+                     alt="">
             </a>
             <p>3등영화</p>
             <p>★ 평점</p>
         </div>
-        <div class="four"> 
+        <div class="four">
             <a href="#">
-                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp" alt="">
+                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp"
+                     alt="">
             </a>
             <p>4등영화</p>
             <p>★ 평점</p>
         </div>
-        <div class="five"> 
+        <div class="five">
             <a href="#">
-                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp" alt="">
+                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp"
+                     alt="">
             </a>
             <p>5등영화</p>
             <p>★ 평점</p>
@@ -326,27 +338,28 @@
 </div>
 
 </body>
+
 </html>
 <script>
-var loginId = document.getElementById("show-id").innerText;
+    var loginId = document.getElementById("show-id").innerText;
 
-if(loginId !== "n") {
-    document.getElementById("login-text").style.display = "none";
-    document.getElementById("sign-text").style.display = "none";
-}
-else {
-    document.getElementById("show-id").style.display = "none";
-    document.getElementById("show-texid").style.display = "none";
-    document.getElementById("mypageLink").style.display = "none";
-}
+    if (loginId !== "n") {
+        document.getElementById("login-text").style.display = "none";
+        document.getElementById("sign-text").style.display = "none";
+    }
+    else {
+        document.getElementById("show-id").style.display = "none";
+        document.getElementById("show-texid").style.display = "none";
+        document.getElementById("mypageLink").style.display = "none";
+    }
 
 
-    function selectAll(selectAll)  {
-      const checkboxes
-           = document.getElementsByName('genre');
+    function selectAll(selectAll) {
+        const checkboxes
+            = document.getElementsByName('genre');
 
-      checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAll.checked;
-      })
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAll.checked;
+        })
     }
 </script>

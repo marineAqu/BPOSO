@@ -72,6 +72,7 @@ public class MovieinfoController {
         model.addAttribute("movNm", movieinfoDTO.getMovieNm());
         model.addAttribute("drctr", movieinfoDTO.getDrctrNm());
         model.addAttribute("opd", movieinfoDTO.getOpnDe());
+        model.addAttribute("rateAvg", reviewService.AvgReview(movieNo));
 
         //검색 결과에 해당하는 list를 전달하고 tempof-viewmovie 페이지로 이동
         model.addAttribute("reviewList", reviewService.SearchReview(movieNo));

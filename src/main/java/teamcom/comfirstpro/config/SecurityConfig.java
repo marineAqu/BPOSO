@@ -23,8 +23,11 @@ public class SecurityConfig {
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .loginProcessingUrl("/login_process") //로그인이 수행되는 url
-                        .defaultSuccessUrl("/") //성공 시 리다이렉트 될 기본주소
-                        .failureForwardUrl("/login")); //실패 시 리다이렉트 될 기본주소
+                        .defaultSuccessUrl("/", true) //성공 시 리다이렉트 될 기본주소
+                        .failureUrl("/login")); //실패 시 리다이렉트 될 기본주소
+
+        http.logout(logout -> logout
+                        .logoutSuccessUrl("/login")); //로그아웃
         return http.build();
     }
 

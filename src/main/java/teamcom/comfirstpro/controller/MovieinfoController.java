@@ -55,12 +55,6 @@ public class MovieinfoController {
         return "redirect:/review?movieNo="+no;
     }
 
-    //TODO: 지워도 되는 내용인듯?? 현 서치리저트 같음
-    @GetMapping("tempof-viewmovie")
-    public String tempofviewmovie(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
-        return "tempof-viewmovie";
-    }
     @GetMapping("review")
     public String review(@RequestParam("movieNo") Long movieNo,
                          Model model, @AuthenticationPrincipal UserDetails userDetails) {
@@ -76,7 +70,7 @@ public class MovieinfoController {
         model.addAttribute("opd", movieinfoDTO.getOpnDe());
         model.addAttribute("rateAvg", reviewService.AvgReview(movieNo));
 
-        //검색 결과에 해당하는 list를 전달하고 tempof-viewmovie 페이지로 이동
+        //검색 결과에 해당하는 list를 전달하고 search-result 페이지로 이동
         model.addAttribute("reviewList", reviewService.SearchReview(movieNo));
 
         return "review";

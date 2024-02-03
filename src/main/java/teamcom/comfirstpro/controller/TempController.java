@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import teamcom.comfirstpro.DTO.MemberDTO;
 import teamcom.comfirstpro.service.MemberService;
@@ -72,19 +71,6 @@ public class TempController {
     public String main(Model model, HttpSession session) {
         System.out.print("메인에서 테스트: "+session.getAttribute("loginId"));
         return "main";
-    }
-
-    //TODO: 임시로 작성한 내용이기 떄문에 html과 함께 해당 컨트롤러는 삭제해도 될 것 같다
-    @GetMapping("header-temp")
-    public String headerTemp(Model model, HttpSession session) {
-        return "header-temp";
-    }
-
-    //TODO: 삭제
-    @GetMapping("/member/{id}")
-    public void findById(@PathVariable Long id, Model model) {
-        MemberDTO memberDTO = memberService.findById(id);
-        model.addAttribute("member", memberDTO);
     }
 
     //TODO: 로그인한 상태로는 회원가입 불가하도록 수정

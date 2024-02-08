@@ -1,5 +1,6 @@
 package teamcom.comfirstpro.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,11 +30,13 @@ public class TempController {
         return "search-result";
     }
 
+
     @GetMapping("login")
-    public String login(Model model) {
+    public String login(HttpServletRequest request, HttpSession session) {
 
         //TODO: 이미 로그인 됐을 경우 접근할 수 없도록 수정
-
+        System.out.println("referer: "+request.getHeader("Referer"));
+        session.setAttribute("lastPage", request.getHeader("Referer"));
         return "login";
     }
 

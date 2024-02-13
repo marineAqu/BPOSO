@@ -52,11 +52,13 @@
 
         .login_btn {
             font-weight: normal;
+            border-width: 0;
             padding: 10px;
+            margin-left: 10px;
             background-color: #bcc7cc;
             color: #FFFFFF;
-            text-decoration-line: none;
             border-radius: 10px;
+            cursor: pointer;
         }
 
         .mypageLink {
@@ -492,14 +494,15 @@
             </form>
         </div>
 
-        <div class="nav-area">
-
-            <span id="show-id" th:text="${session.loginId}"> 아이디</span> <span id="show-texid"> 님</span>
-            <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
-            <a class="login_btn" id="login-text" href="/login">로그인</a>
-            <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
-            <!--<a sec:authorize="isAuthenticated()" id="login-text" href="/login">로그인</a>-->
-        </div>
+        <th:block th:if="${loginId}" class="nav-area">
+            <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-texid"> 님</span>
+            <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+            <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
+        </th:block>
+        <th:block th:unless="${loginId}" class="nav-area">
+            <button class="login_btn" type="button" onclick="location.href='/login'">로그인</button>
+            <button class="login_btn" type="button" onclick="location.href='/sign-up'">회원가입</button>
+        </th:block>
     </div>
 </div>
 
@@ -546,7 +549,7 @@
                 <input type="hidden" name="no" th:value="${no}">
                 <div class="comment-top">
                     <!--왼쪽 아이디 띄우기-->
-                    <h4><span id="myid">본인아이디:</span></h4>
+                    <h4><span id="myid" th:text="${loginId != null ? loginId : '로그인 후에 이용해주세요'}"></span></h4>
                     <p th:text="${session.loginId}"></p>
                     <!--중간 별점 재기-->
                     <div class="starpoint_wrap">
@@ -723,22 +726,6 @@
                 console.error('데이터를 가져오는 중 오류 발생:', error);
             });
 
-
-
-
-        var loginId = document.getElementById("show-id").innerText;
-
-        if (loginId !== "n") {
-            document.getElementById("login-text").style.display = "none";
-            document.getElementById("sign-text").style.display = "none";
-
-        }
-        else {
-            document.getElementById("show-id").style.display = "none";
-            document.getElementById("show-texid").style.display = "none";
-            document.getElementById("mypageLink").style.display = "none";
-            document.getElementById("subPorm").style.display = "none";
-        }
 
         function reviewPostFun(event) {
             const starRadios = document.querySelectorAll('input.star_radio');

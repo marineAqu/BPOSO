@@ -15,4 +15,6 @@ public interface MovieinfoRepository extends JpaRepository<MovieinfoEntity, Long
     //List<MovieinfoEntity> findByMovieNm(String searchName);
 
     Optional<MovieinfoEntity> findByNo(Long no);
+
+    List<MovieinfoEntity> findTop5ByOrderByViewngNmprCoDesc();
 }

@@ -26,7 +26,6 @@ public class MovieinfoDTO {
     private String genreNm; //장르명
     private String gradNm; //등급명
     private String movieSdivNm; //영화구분명
-    private double avgRate; //평균 별점
 
     public static MovieinfoDTO toMovieinfoDTO(MovieinfoEntity movieinfoEntity){
         MovieinfoDTO movieinfoDTO = new MovieinfoDTO();

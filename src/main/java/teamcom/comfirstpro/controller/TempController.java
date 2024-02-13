@@ -1,15 +1,13 @@
 package teamcom.comfirstpro.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import teamcom.comfirstpro.DTO.MemberDTO;
 import teamcom.comfirstpro.service.MemberService;
@@ -25,18 +23,14 @@ public class TempController {
     private final SignUpFormValidator signUpFormValidator;
 
     @GetMapping("search-result")
-    public String searchResult(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
+    public String searchResult(Model model, HttpSession session) {
+
         return "search-result";
     }
 
-
     @GetMapping("login")
-    public String login(HttpServletRequest request, HttpSession session) {
+    public String login(Model model, HttpSession session) {
 
-        //TODO: 이미 로그인 됐을 경우 접근할 수 없도록 수정
-        System.out.println("referer: "+request.getHeader("Referer"));
-        session.setAttribute("lastPage", request.getHeader("Referer"));
         return "login";
     }
 
@@ -61,24 +55,36 @@ public class TempController {
     }
  */
 
+    @GetMapping("checkpage")
+    public String checkpage(Model model, HttpSession session) {
+        System.out.println("여기는 체크페이지 getMapping:"+session.getAttribute("loginId"));
+        return "checkpage";
+    }
 
-    //TODO: 마이페이지 삭제
     @GetMapping("mypage")
-    public String mypage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
+    public String mypage(Model model, HttpSession session) {
         return "mypage";
     }
 
-    //TODO: '/'로 들어갈 수 있기떄문에 해당 컨트롤러는 삭제해도 될 것 같다
     @GetMapping("main")
     public String main(Model model, HttpSession session) {
         System.out.print("메인에서 테스트: "+session.getAttribute("loginId"));
         return "main";
     }
 
-    //TODO: 로그인한 상태로는 회원가입 불가하도록 수정
+    @GetMapping("header-temp")
+    public String headerTemp(Model model, HttpSession session) {
+        return "header-temp";
+    }
+
+    @GetMapping("/member/{id}")
+    public void findById(@PathVariable Long id, Model model) {
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member", memberDTO);
+    }
+
     @GetMapping("sign-up")
-    public String signup(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+    public String signup(Model model) {
         return "sign-up";
     }
 

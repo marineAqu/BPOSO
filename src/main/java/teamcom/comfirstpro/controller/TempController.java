@@ -61,8 +61,6 @@ public class TempController {
     }
  */
 
-
-    //TODO: 마이페이지 삭제
     @GetMapping("mypage")
     public String mypage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());

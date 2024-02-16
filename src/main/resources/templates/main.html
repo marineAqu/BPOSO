@@ -271,16 +271,17 @@
         </div>
         <!--<a sec:authorize="isAuthenticated()" id="login-text" href="/login">로그인</a>-->
         <!--
-    <div class="nav-area">
-        <span id="show-id" th:text="${session.loginId}" > 아이디</span> <span id="show-texid"> 님</span>
-        <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
-        <a class="login_btn" id="login-text" href="/login">로그인</a>
-        <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
-    </div>
-    -->
+<div class="nav-area">
+<span id="show-id" th:text="${session.loginId}" > 아이디</span> <span id="show-texid"> 님</span>
+<span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+<a class="login_btn" id="login-text" href="/login">로그인</a>
+<a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
+</div>
+-->
         <th:block th:if="${loginId}" class="nav-area">
             <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-texid"> 님</span>
-            <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+            <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink"
+                                                href="/mypage-main">마이페이지</a></span>
             <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
         </th:block>
         <th:block th:unless="${loginId}" class="nav-area">
@@ -295,47 +296,50 @@
     <div class="audB">
         <div class="one">
             <a href="#">
-                <img src="https://i.namu.wiki/i/W9-BvWLJ1wJOLLOUldPw1Px_TeVnr2_5v_ODtYZSooI0NYAvAY1hXoabVa8MscXl6C_fJq-oUoCoDiLwig54PQ.webp"
-                     alt="">
+                <img id="poster1" src="image/poster_loading.png" alt="">
             </a>
-            <p>1등영화</p>
-            <p>★ 평점</p>
+            <p id="top1name" th:text="${top1.movieNm}">1등영화</p>
+            <p th:if="${top1.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:unless="${top1.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top1.avgRate, 1, 3)}">★ 평점
+            </p>
         </div>
         <div class="two">
             <a href="#">
-                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp"
-                     alt="">
+                <img id="poster2" src="image/poster_loading.png" alt="">
             </a>
-            <p>2등영화</p>
-            <p>★ 평점</p>
+            <p id="top2name" th:text="${top2.movieNm}">2등영화</p>
+            <p th:if="${top2.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:unless="${top2.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top2.avgRate, 1, 3)}">★ 평점
+            </p>
         </div>
         <div class="three">
             <a href="#">
-                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp"
-                     alt="">
+                <img id="poster3" src="image/poster_loading.png" alt="">
             </a>
-            <p>3등영화</p>
-            <p>★ 평점</p>
+            <p id="top3name" th:text="${top3.movieNm}">3등영화</p>
+            <p th:if="${top3.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:unless="${top3.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top3.avgRate, 1, 3)}">★ 평점
+            </p>
         </div>
         <div class="four">
             <a href="#">
-                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp"
-                     alt="">
+                <img id="poster4" src="image/poster_loading.png" alt="">
             </a>
-            <p>4등영화</p>
-            <p>★ 평점</p>
+            <p id="top4name" th:text="${top4.movieNm}">4등영화</p>
+            <p th:if="${top4.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:unless="${top4.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top4.avgRate, 1, 3)}">★ 평점
+            </p>
         </div>
         <div class="five">
             <a href="#">
-                <img src="https://i.namu.wiki/i/fxKR36rl48A3K-KBYTxmov-dO9NNQrzuRh8Uocg-PKvWXYGVQQZqDlvJ61EgHojjNI6mesSTFvbJIq8FEr06nw.webp"
-                     alt="">
+                <img id="poster5" src="image/poster_loading.png" alt="">
             </a>
-            <p>5등영화</p>
-            <p>★ 평점</p>
+            <p id="top5name" th:text="${top5.movieNm}">5등영화</p>
+            <p th:if="${top5.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:unless="${top5.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top5.avgRate, 1, 3)}">★ 평점
+            </p>
         </div>
     </div>
-
-
 
 </div>
 
@@ -343,6 +347,45 @@
 
 </html>
 <script>
+    posterURL(document.getElementById("top1name").innerText, document.getElementById("poster1"));
+    posterURL(document.getElementById("top2name").innerText, document.getElementById("poster2"));
+    posterURL(document.getElementById("top3name").innerText, document.getElementById("poster3"));
+    posterURL(document.getElementById("top4name").innerText, document.getElementById("poster4"));
+    posterURL(document.getElementById("top5name").innerText, document.getElementById("poster5"));
+
+
+    function posterURL(movie_title, posterURL) {
+        movie_title = movie_title.replace(/\:/g, '');
+        let postersValue;
+        movie_title = movie_title.replace(/\s/g, '');
+        let url = 'https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=K4HT80T1S6JR6O193Z1T&detail=Y&listCount=1&title='
+        movie_title = '"' + movie_title + '"';
+        url += movie_title;
+
+        fetch(url)
+            .then((response) => response.json()) // Fetch 응답 객체를 받아옴
+            .then((json) => {
+                postersValue = json.Data[0].Result[0].posters;
+
+                // 빈 문자열이면 종료
+                if (postersValue.trim() === "") return;
+
+                if (postersValue.includes('|')) {
+                    // '|' 문자가 있다면(포스터가 여러개 있으면) 첫 번째 '|' 이전까지의 부분 문자열 추출
+                    postersValue = postersValue.split('|')[0];
+                    console.log(postersValue);
+                } else {
+                    // '|' 문자가 없다면(포스터가 하나이므로) 원래 문자열 그대로 사용
+                    console.log(postersValue);
+                }
+                posterURL.src = postersValue;
+            })
+            .catch((error) => {
+                console.error('데이터를 가져오는 중 오류 발생:', error);
+            });
+    }
+
+
     function selectAll(selectAll) {
         const checkboxes = document.getElementsByName('genre');
 
@@ -350,4 +393,7 @@
             checkbox.checked = selectAll.checked;
         })
     }
+
+
+
 </script>

@@ -335,7 +335,7 @@
             <th:block th:if="${loginId}" class="nav-area">
                 <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-texid"> 님</span>
                 <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink"
-                                                    href="/mypage-main">마이페이지</a></span>
+                                                    href="/mypage">마이페이지</a></span>
                 <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
             </th:block>
             <th:block th:unless="${loginId}" class="nav-area">

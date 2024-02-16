@@ -349,9 +349,9 @@
     <aside class="sidebar">
         <h2>목차</h2>
         <ul id="tabList">
-            <li><a href="#" data-tab="Home" class="active">홈</a></li>
-            <li><a href="#" data-tab="Like">보고싶어요</a></li>
-            <li><a href="#" data-tab="Review">후기</a></li>
+            <li><a data-tab="Home" class="active">홈</a></li>
+            <li><a data-tab="Like">보고싶어요</a></li>
+            <li><a data-tab="Review">후기</a></li>
         </ul>
     </aside>
 
@@ -372,10 +372,9 @@
         </div>
     </section>
 
-    <script src="mypageTab.js"></script>
 </main>
-
 </html>
+
 <script>
     function selectAll(selectAll) {
         const checkboxes
@@ -385,4 +384,31 @@
             checkbox.checked = selectAll.checked;
         })
     }
+</script>
+
+// 마이페이지 버튼. 일단 추가, 이후에 js코드로 분리할 예정
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('tabList').addEventListener('click', function(e) {
+            var target = e.target;
+            if (target.tagName === 'A') {
+                e.preventDefault();
+                var tabName = target.getAttribute('data-tab');
+                var contents = document.getElementsByClassName('container');
+                for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = 'none';
+                }
+                document.getElementById(tabName).style.display = 'flex';
+
+                // 모든 탭에서 active class 제거
+                var tabs = document.querySelectorAll('#tabList a');
+                for (var i = 0; i < tabs.length; i++) {
+                    tabs[i].classList.remove('active');
+                }
+
+                // 클릭한 탭에 class 추가
+                target.classList.add('active');
+            }
+        });
+    });
 </script>

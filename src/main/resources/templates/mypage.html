@@ -332,12 +332,16 @@
                 </form>
             </div>
 
-            <div class="nav-area">
-                <span id="show-id" th:text="${session.loginId}"> 아이디</span> <span id="show-texid"> 님의</span>
-                <span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
-                <a class="login_btn" id="login-text" href="/login">로그인</a>
-                <a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
-            </div>
+            <th:block th:if="${loginId}" class="nav-area">
+                <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-texid"> 님</span>
+                <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink"
+                                                    href="/mypage-main">마이페이지</a></span>
+                <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
+            </th:block>
+            <th:block th:unless="${loginId}" class="nav-area">
+                <button class="login_btn" type="button" onclick="location.href='/login'">로그인</button>
+                <button class="login_btn" type="button" onclick="location.href='/sign-up'">회원가입</button>
+            </th:block>
         </div>
     </div>
 
@@ -373,17 +377,6 @@
 
 </html>
 <script>
-    var loginId = document.getElementById("show-id").innerText;
-
-    if (loginId !== "n") {
-        document.getElementById("login-text").style.display = "none";
-        document.getElementById("sign-text").style.display = "none";
-    } else {
-        document.getElementById("show-id").style.display = "none";
-        document.getElementById("show-texid").style.display = "none";
-        document.getElementById("mypageLink").style.display = "none";
-    }
-
     function selectAll(selectAll) {
         const checkboxes
             = document.getElementsByName('genre');

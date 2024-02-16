@@ -1,10 +1,12 @@
 package teamcom.comfirstpro.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.stereotype.Service;
 import teamcom.comfirstpro.DTO.MovieinfoDTO;
 import teamcom.comfirstpro.entity.MovieinfoEntity;
 import teamcom.comfirstpro.repository.MovieinfoRepository;
+import teamcom.comfirstpro.repository.ReviewRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 public class MovieinfoService {
 
     private final MovieinfoRepository movieinfoRepository;
+    private final ReviewRepository reviewRepository;
+
     public List<MovieinfoDTO> SearchMovie(String searchName, List<String> genres, String sort) {
         //제목으로 검색
         List<MovieinfoEntity> movieinfoEntityList = movieinfoRepository.findByMovieNm(searchName);
@@ -78,6 +82,27 @@ public class MovieinfoService {
         MovieinfoDTO dto = MovieinfoDTO.toMovieinfoDTO(movieinfoEntity);
 
         return dto;
+    }
+
+    public List<MovieinfoDTO> SearchMainMovie(){
+
+        List<MovieinfoEntity> list = movieinfoRepository.findTop5ByOrderByViewngNmprCoDesc();
+
+        List<MovieinfoDTO> DTOList = new ArrayList<>();
+
+        for (int i=0; i<5; i++) {
+            DTOList.add(MovieinfoDTO.toMovieinfoDTO(list.get(i)));
+
+            //평균 별점 가져오기
+            try{
+                DTOList.get(i).setAvgRate(reviewRepository.findAverageRateByMovNo(DTOList.get(i).getNo()));
+            }catch (AopInvocationException e){
+                DTOList.get(i).setAvgRate(-1.0);
+            }
+        }
+
+        return DTOList;
+
     }
 
 /*

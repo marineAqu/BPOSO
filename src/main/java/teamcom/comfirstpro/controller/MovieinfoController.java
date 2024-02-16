@@ -31,6 +31,8 @@ public class MovieinfoController {
                                  Model model) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
 
+        //TODO: 주소에 파라메터 넘기도록 수정
+
         //검색 결과에 해당하는 list를 전달하고 tempof-viewmovie 페이지로 이동
         model.addAttribute("movieList", movieinfoService.SearchMovie(searchName, genres, sort));
         return "search-result";
@@ -74,22 +76,5 @@ public class MovieinfoController {
         model.addAttribute("reviewList", reviewService.SearchReview(movieNo));
 
         return "review";
-    }
-
-    @GetMapping("mypage-like")
-    public String mypageLike(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
-        return "mypage-like";
-    }
-    @GetMapping("mypage-main")
-    public String mypageMain(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
-        return "mypage-main";
-
-    }
-    @GetMapping("mypage-review")
-    public String mypageReview(Model model,@AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
-        return "mypage-review";
     }
 }

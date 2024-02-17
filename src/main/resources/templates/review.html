@@ -411,6 +411,7 @@
             white-space: pre-line;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 
 <body>
@@ -526,14 +527,14 @@
         <!--평점과 보고싶어요-->
         <!--평점 김도연 작성-->
         <p>
-            <span>평점: ★</span>
+            <span>평점: </span>
             <span th:if="${rateAvg == -1.0}">아직 등록된 리뷰가 없습니다.</span>
             <span th:unless="${rateAvg == -1.0}" th:text="'★ '+${rateAvg}"></span>
         </p>
         <br>
 
         <div class="www">
-            <button class="circle-button" onclick="this.classList.toggle('clicked')" align="middle">
+            <button class="circle-button" th:classappend="${wantWatch == 1} ? 'clicked' : ''" onclick="toggleActiveClass(this)" align="middle">
             </button>
             <span id="like"><br>&nbsp; 보고싶어요</span>
         </div>
@@ -725,6 +726,34 @@
             .catch((error) => {
                 console.error('데이터를 가져오는 중 오류 발생:', error);
             });
+
+//보고싶어요 버튼을 눌렀을 때 함수
+    function toggleActiveClass(element) {
+
+        if(document.getElementById("myid").innerText == "로그인 후에 이용해주세요") alert("로그인 후에 이용해주세요.");
+else{
+var heartChk;
+        if (element.classList.contains('clicked')) heartChk = 1;
+        else heartChk = 0;
+
+        $.ajax(
+            {
+                type: "post",
+                url: "saveWantsee",
+                data: {
+                    "userId": document.getElementById("myid").innerText,
+                    "heartChk": heartChk,
+                    "movName": document.getElementById("movieName").innerText
+                },
+                success: function (res) {
+                    element.classList.toggle('clicked');
+                },
+                error: function (err) {
+                    alert("통신 상의 오류가 발생했습니다. 다시 시도해주세요.");
+                }
+            });
+}
+    }
 
 
         function reviewPostFun(event) {

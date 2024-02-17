@@ -12,6 +12,7 @@ import teamcom.comfirstpro.DTO.MovieinfoDTO;
 import teamcom.comfirstpro.DTO.ReviewDTO;
 import teamcom.comfirstpro.service.MovieinfoService;
 import teamcom.comfirstpro.service.ReviewService;
+import teamcom.comfirstpro.service.WantseeService;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class MovieinfoController {
 
     private final MovieinfoService movieinfoService;
     private final ReviewService reviewService;
+    private final WantseeService wantseeService;
 
     //header-temp에서 돋보기 버튼(검색버튼)을 눌렀을 때
     @PostMapping("SearchMovie")
@@ -71,6 +73,9 @@ public class MovieinfoController {
         model.addAttribute("drctr", movieinfoDTO.getDrctrNm());
         model.addAttribute("opd", movieinfoDTO.getOpnDe());
         model.addAttribute("rateAvg", reviewService.AvgReview(movieNo));
+
+        //보고싶어요 여부
+        if(userDetails != null) model.addAttribute("wantWatch", wantseeService.IsMovieWantsee(userDetails.getUsername(), movieNo));
 
         //검색 결과에 해당하는 list를 전달하고 search-result 페이지로 이동
         model.addAttribute("reviewList", reviewService.SearchReview(movieNo));

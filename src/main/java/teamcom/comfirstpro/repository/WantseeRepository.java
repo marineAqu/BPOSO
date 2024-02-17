@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface WantseeRepository  extends JpaRepository<ReviewEntity, Long> {
     List<WantseeEntity> findByMovNo(Long movNo);
+
+    Boolean existsByUserIdAndMovNo(String userId, Long movNo);
 }

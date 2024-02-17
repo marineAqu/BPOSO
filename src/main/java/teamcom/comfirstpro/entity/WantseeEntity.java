@@ -20,6 +20,12 @@ public class WantseeEntity {
     @Column
     private Long movNo; //영화 번호
 
-    @Column
-    private String movieNm; //영화 이름
+    public static WantseeEntity toWantseeEntity (String loginId, Long movieNo) {
+        WantseeEntity wantseeEntity = new WantseeEntity();
+
+        wantseeEntity.setUserId(loginId);
+        wantseeEntity.setMovNo(movieNo);
+
+        return wantseeEntity;
+    }
 }

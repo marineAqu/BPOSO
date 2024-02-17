@@ -19,7 +19,6 @@ public class WantseeDTO {
 
         wantseeDTO.setUserId(wantseeEntity.getUserId());
         wantseeDTO.setMovNo(wantseeEntity.getMovNo());
-        wantseeDTO.setMovieNm(wantseeEntity.getMovieNm());
 
         return wantseeDTO;
     }

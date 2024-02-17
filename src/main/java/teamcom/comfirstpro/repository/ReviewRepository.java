@@ -10,6 +10,8 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
     List<ReviewEntity> findByMovNo(Long movNo);
 
+    List<ReviewEntity> findByUserId(String userId);
+
     @Query("SELECT avg(m.rate) FROM ReviewEntity m WHERE m.movNo = :movNo")
     double findAverageRateByMovNo(@Param("movNo") Long movNo);
 }

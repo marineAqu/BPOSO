@@ -11,8 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import teamcom.comfirstpro.DTO.MemberDTO;
 import teamcom.comfirstpro.service.MemberService;
+import teamcom.comfirstpro.service.ReviewService;
+import teamcom.comfirstpro.service.WantseeService;
 import teamcom.comfirstpro.validator.SignUpFormValidator;
 
 import java.util.Map;
@@ -23,6 +27,8 @@ public class TempController {
 
     private final MemberService memberService;
     private final SignUpFormValidator signUpFormValidator;
+    private final ReviewService reviewService;
+    private final WantseeService wantseeService;
 
     @GetMapping("search-result")
     public String searchResult(Model model, @AuthenticationPrincipal UserDetails userDetails) {
@@ -64,6 +70,16 @@ public class TempController {
     @GetMapping("mypage")
     public String mypage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
+
+        //<홈> 탭
+
+
+        //<보고싶어요> 탭
+
+
+        //<후기리스트> 탭
+        reviewService.SearchMyReview(userDetails.getUsername());
+
         return "mypage";
     }
 
@@ -96,5 +112,11 @@ public class TempController {
         }
         memberService.saveMem(memberDTO);
         return "login";
+    }
+
+    @PostMapping("saveWantsee")
+    public @ResponseBody void saveWantsee(@RequestParam("userId") String userId, @RequestParam("heartChk") int heartChk, @RequestParam("movName") String movName) {
+        System.out.println("saveVocaTit 함수 들어옴 (컨트롤러)");
+        wantseeService.saveWantsee(userId, heartChk, movName);
     }
 }

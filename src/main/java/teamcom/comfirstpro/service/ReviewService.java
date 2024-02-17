@@ -45,12 +45,21 @@ public class ReviewService {
     public List<ReviewDTO> SearchReview(Long movieNo) {
         List<ReviewEntity> reviewEntityList = reviewRepository.findByMovNo(movieNo);
 
-        //List<ReviewEntity> reviewEntityList = reviewRepository.findAll();
         List<ReviewDTO> reviewDTOList = new ArrayList<>();
         for(ReviewEntity reviewEntity: reviewEntityList) reviewDTOList.add(ReviewDTO.toReviewDTO(reviewEntity));
 
         return reviewDTOList;
     }
+
+    public List<ReviewDTO> SearchMyReview(String userId) {
+        List<ReviewEntity> reviewEntityList = reviewRepository.findByUserId(userId);
+
+        List<ReviewDTO> reviewDTOList = new ArrayList<>();
+        for(ReviewEntity reviewEntity: reviewEntityList) reviewDTOList.add(ReviewDTO.toReviewDTO(reviewEntity));
+
+        return reviewDTOList;
+    }
+
 
     public Double AvgReview(Long movieNo) {
         List<ReviewEntity> movies = reviewRepository.findByMovNo(movieNo);

@@ -20,6 +20,10 @@ public class WantseeEntity {
     @Column
     private Long movNo; //영화 번호
 
+    @OneToOne
+    @JoinColumn(name = "movNo", referencedColumnName = "no", insertable = false, updatable = false)
+    private MovieinfoEntity movieinfo;
+
     public static WantseeEntity toWantseeEntity (String loginId, Long movieNo) {
         WantseeEntity wantseeEntity = new WantseeEntity();
 

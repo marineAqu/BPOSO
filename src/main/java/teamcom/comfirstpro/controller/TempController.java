@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import teamcom.comfirstpro.DTO.MemberDTO;
+import teamcom.comfirstpro.principal.PrincipalDetails;
+import teamcom.comfirstpro.principal.PrincipalDetailsService;
 import teamcom.comfirstpro.service.MemberService;
 import teamcom.comfirstpro.service.ReviewService;
 import teamcom.comfirstpro.service.WantseeService;
@@ -29,6 +31,7 @@ public class TempController {
     private final SignUpFormValidator signUpFormValidator;
     private final ReviewService reviewService;
     private final WantseeService wantseeService;
+    private final PrincipalDetailsService principalDetailsService;
 
     @GetMapping("search-result")
     public String searchResult(Model model, @AuthenticationPrincipal UserDetails userDetails) {
@@ -71,14 +74,18 @@ public class TempController {
     public String mypage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
 
+        PrincipalDetails principalDetails = (PrincipalDetails) userDetails;
+        model.addAttribute("userName", principalDetails.getNickName());
+
         //<홈> 탭
 
 
         //<보고싶어요> 탭
-
+        model.addAttribute("wantseeList", wantseeService.myWantseeList(userDetails.getUsername()));
 
         //<후기리스트> 탭
-        reviewService.SearchMyReview(userDetails.getUsername());
+        model.addAttribute("reviewList", reviewService.SearchMyReview(userDetails.getUsername()));
+
 
         return "mypage";
     }

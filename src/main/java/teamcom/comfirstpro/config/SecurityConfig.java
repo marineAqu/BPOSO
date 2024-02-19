@@ -1,6 +1,5 @@
 package teamcom.comfirstpro.config;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,15 +10,17 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http, HttpSession session) throws Exception {
-        http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests //처음 뜨는 시큐리티 로그인 화면 해제
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
+                // 마이페이지는 인증된 사용자만 허용 (접근 시 로그인 페이지로 돌아감)
+                .requestMatchers("/mypage").authenticated()
+                .anyRequest().permitAll())
                 .csrf(csrf -> csrf.disable()); // CSRF 보호 비활성화
 
         http.formLogin(login -> login
@@ -34,6 +35,7 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .permitAll()
                 .logoutSuccessHandler(logoutSuccessHandler()));
+
         return http.build();
     }
 

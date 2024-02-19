@@ -51,13 +51,13 @@ public class ReviewService {
         return reviewDTOList;
     }
 
-    public List<ReviewDTO> SearchMyReview(String userId) {
+    public List<ReviewEntity> SearchMyReview(String userId) {
         List<ReviewEntity> reviewEntityList = reviewRepository.findByUserId(userId);
 
-        List<ReviewDTO> reviewDTOList = new ArrayList<>();
-        for(ReviewEntity reviewEntity: reviewEntityList) reviewDTOList.add(ReviewDTO.toReviewDTO(reviewEntity));
+        //List<ReviewDTO> reviewDTOList = new ArrayList<>();
+        //for(ReviewEntity reviewEntity: reviewEntityList) reviewDTOList.add(ReviewDTO.toReviewDTO(reviewEntity));
 
-        return reviewDTOList;
+        return reviewEntityList;
     }
 
 

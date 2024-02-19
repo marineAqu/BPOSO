@@ -3,9 +3,13 @@ package teamcom.comfirstpro.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import teamcom.comfirstpro.entity.MovieinfoEntity;
 import teamcom.comfirstpro.entity.WantseeEntity;
 import teamcom.comfirstpro.repository.MovieinfoRepository;
 import teamcom.comfirstpro.repository.WantseeRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +39,15 @@ public class WantseeService {
             WantseeEntity wantseeEntity = WantseeEntity.toWantseeEntity(loginId, movieNo);
             wantseeRepository.save(wantseeEntity);
         }
+    }
+
+    public List<MovieinfoEntity> myWantseeList(String userId){
+        //해당 유저의 보고싶어요 리스트
+        List<WantseeEntity> wantseeList = wantseeRepository.findByUserId(userId);
+        List<MovieinfoEntity> wantseeMovList = new ArrayList<>();
+
+        for(WantseeEntity i : wantseeList) wantseeMovList.add(i.getMovieinfo());
+
+        return wantseeMovList;
     }
 }

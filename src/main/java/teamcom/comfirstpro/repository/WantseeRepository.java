@@ -9,4 +9,5 @@ public interface WantseeRepository  extends JpaRepository<WantseeEntity, Long> {
     List<WantseeEntity> findByMovNo(Long movNo);
     Boolean existsByUserIdAndMovNo(String userId, Long movNo);
     void deleteByUserIdAndMovNo(String userId, Long movNo);
+    List<WantseeEntity> findByUserId(String userId);
 }

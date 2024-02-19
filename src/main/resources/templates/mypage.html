@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>마이페이지</title>
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
@@ -50,11 +49,13 @@
 
         .login_btn {
             font-weight: normal;
-            padding: 8px;
+            border-width: 0;
+            padding: 10px;
+            margin-left: 10px;
             background-color: #bcc7cc;
             color: #FFFFFF;
-            text-decoration-line: none;
             border-radius: 10px;
+            cursor: pointer;
         }
 
         .mypageLink {
@@ -95,6 +96,10 @@
             margin: 0;
             border: none;
             background-color: transparent;
+        }
+
+        tr {
+            margin-bottom: 10%;
         }
 
         .s-box button img {
@@ -224,7 +229,7 @@
                 height: 100%;
             }
 
-            .container.active{
+            .container.active {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -244,8 +249,12 @@
                 font-weight: bold;
                 margin-top: 20px;
             }
-        }
 
+            .movieNm{
+                font-weight: bold;
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 
@@ -334,8 +343,7 @@
 
             <th:block th:if="${loginId}" class="nav-area">
                 <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-texid"> 님</span>
-                <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink"
-                                                    href="/mypage">마이페이지</a></span>
+                <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink" href="/mypage">마이페이지</a></span>
                 <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
             </th:block>
             <th:block th:unless="${loginId}" class="nav-area">
@@ -356,23 +364,53 @@
     </aside>
 
     <section class="temp">
+        <!--홈 탭-->
         <div id="Home" class="container active">
-            <p th:text="${name} + '님의'"> 아이디 님의</p>
-            <p>마이페이지</p>
+            <p th:text="${userName} + '님 환영합니다!'"> 아이디 님 환영합니다!</p>
         </div>
 
+
+        <!--보고싶어요 탭-->
         <div id="Like" class="container">
-            <p th:text="${name} + '님'" > 아이디 님의</p>
-            <p>보고싶어요 리스트</p>
+            <p th:text="${userName} + '님의 보고싶어요'"> 아이디 님의 보고싶어요</p>
+            <table>
+                <tr th:each="Movieinfo : ${wantseeList}">
+                    <td style="width: 50%;">
+                        <div style="cursor:pointer;" th:onclick="goToReview([[${Movieinfo.no}]])">
+                            <span th:text="${Movieinfo.opnDe}">개봉일</span>
+                            <span th:text="${Movieinfo.gradNm}">관람 등급</span>
+                            <br>
+                            <span class="movieNm" colspan=2 th:text="${Movieinfo.movieNm}">영화 제목</span>
+                            <br>
+                            <span colspan=2 th:text="${Movieinfo.drctrNm}">감독명</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
+
+        <!--후기 탭-->
         <div id="Review" class="container">
-            <p th:text="${name} + '님의'" > 아이디 님의</p>
-            <p>후기 리스트</p>
+            <p th:text="${userName} + '님이 남긴 후기'"> 아이디 님이 남긴 후기</p>
+
+            <table>
+                <tr th:each="ReviewInfo : ${reviewList}">
+                    <td style="width: 50%;">
+                        <div style="cursor:pointer;" th:onclick="goToReview([[${ReviewInfo.movNo}]])">
+                            <span class="movieNm" th:text="${ReviewInfo.movieNm}">영화 이름</span>
+                            <span th:text="${ReviewInfo.rate}">내가 준 별점</span>
+                            <br>
+                            <span style="white-space : pre-line;" th:text="${ReviewInfo.reviewCon}">리뷰 내용</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </section>
 
 </main>
+
 </html>
 
 <script>
@@ -388,8 +426,8 @@
 
 // 마이페이지 버튼. 일단 추가, 이후에 js코드로 분리할 예정
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById('tabList').addEventListener('click', function(e) {
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById('tabList').addEventListener('click', function (e) {
             var target = e.target;
             if (target.tagName === 'A') {
                 e.preventDefault();
@@ -411,4 +449,10 @@
             }
         });
     });
+
+    //영화 번호에 해당하는 영화 상세 페이지로 이동
+    function goToReview(movieNo) {
+        var reviewPageUrl = "/review?movieNo=" + movieNo;
+        window.location.href = reviewPageUrl;
+    }
 </script>

@@ -41,11 +41,11 @@ public class TempController {
 
 
     @GetMapping("login")
-    public String login(HttpServletRequest request, HttpSession session) {
+    public String login(HttpServletRequest request, HttpSession session, @AuthenticationPrincipal UserDetails userDetails) {
+        if(userDetails != null) return "main"; //이미 로그인했을 경우 메인으로
 
-        //TODO: 이미 로그인 됐을 경우 접근할 수 없도록 수정
-        System.out.println("referer: "+request.getHeader("Referer"));
-        session.setAttribute("lastPage", request.getHeader("Referer"));
+
+        session.setAttribute("lastPage", request.getHeader("Referer")); //로그인 성공 시 이전 페이지로 이동
         return "login";
     }
 
@@ -90,16 +90,15 @@ public class TempController {
         return "mypage";
     }
 
-    //TODO: '/'로 들어갈 수 있기떄문에 해당 컨트롤러는 삭제해도 될 것 같다
     @GetMapping("main")
-    public String main(Model model, HttpSession session) {
-        System.out.print("메인에서 테스트: "+session.getAttribute("loginId"));
+    public String main(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
         return "main";
     }
 
-    //TODO: 로그인한 상태로는 회원가입 불가하도록 수정
     @GetMapping("sign-up")
     public String signup(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if(userDetails != null) return "main"; //이미 로그인한 경우 메인으로
         return "sign-up";
     }
 

@@ -17,10 +17,12 @@ import teamcom.comfirstpro.DTO.MemberDTO;
 import teamcom.comfirstpro.principal.PrincipalDetails;
 import teamcom.comfirstpro.principal.PrincipalDetailsService;
 import teamcom.comfirstpro.service.MemberService;
+import teamcom.comfirstpro.service.MovieinfoService;
 import teamcom.comfirstpro.service.ReviewService;
 import teamcom.comfirstpro.service.WantseeService;
 import teamcom.comfirstpro.validator.SignUpFormValidator;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -32,10 +34,19 @@ public class TempController {
     private final ReviewService reviewService;
     private final WantseeService wantseeService;
     private final PrincipalDetailsService principalDetailsService;
+    private final MovieinfoService movieinfoService;
 
     @GetMapping("search-result")
-    public String searchResult(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+    public String searchResult(@RequestParam("searchName") String searchName,
+                               @RequestParam(value = "genre", required = false) List<String> genres,
+                               @RequestParam("sort") String sort,
+                               Model model,
+                               @AuthenticationPrincipal UserDetails userDetails) {
+
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
+
+        model.addAttribute("movieList", movieinfoService.SearchMovie(searchName, genres, sort));
+
         return "search-result";
     }
 

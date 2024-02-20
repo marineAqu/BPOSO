@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamcom.comfirstpro.DTO.MovieinfoDTO;
 import teamcom.comfirstpro.DTO.ReviewDTO;
 import teamcom.comfirstpro.service.MovieinfoService;
@@ -30,14 +31,23 @@ public class MovieinfoController {
                                  @RequestParam(value = "genre", required = false) List<String> genres,
                                  @RequestParam("sort") String sort,
                                  @AuthenticationPrincipal UserDetails userDetails,
-                                 Model model) {
+                                 Model model,
+                                 RedirectAttributes redirectAttributes) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
 
-        //TODO: 주소에 파라메터 넘기도록 수정
+        //검색 결과페이지에서 로그인 시 검색 결과 페이지로 돌아가지지 않는 문제 해결: 주소에 내용을 담음
 
-        //검색 결과에 해당하는 list를 전달하고 tempof-viewmovie 페이지로 이동
-        model.addAttribute("movieList", movieinfoService.SearchMovie(searchName, genres, sort));
-        return "search-result";
+        //model.addAttribute("movieList", movieinfoService.SearchMovie(searchName, genres, sort));
+        //return "search-result";
+        //return "search-result?searchName="+searchName+"&genres="+genres+"&sort="+sort;
+
+        redirectAttributes.addAttribute("searchName", searchName);
+        if (genres != null && !genres.isEmpty()) {
+            redirectAttributes.addAttribute("genre", genres);
+        }
+        redirectAttributes.addAttribute("sort", sort);
+
+        return "redirect:/search-result";
     }
 
     @PostMapping("PostReview")

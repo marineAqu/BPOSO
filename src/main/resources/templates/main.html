@@ -18,6 +18,7 @@
 
         .header {
             width: 100%;
+            min-width: 900px;
             height: 100px;
             background: #EEEEEE;
             font-family: 'Gothic A1', sans-serif;
@@ -35,7 +36,7 @@
 
         .logo {
             flex-grow: 3;
-            margin: 0 0 0 0;
+            margin: 0 5px 0 5px;
             font-family: 'Gothic A1', sans-serif;
             font-weight: 200;
             font-size: 14px;
@@ -59,9 +60,41 @@
             cursor: pointer;
         }
 
+
+        .logout_btn {
+            font-weight: normal;
+            border-width: 0;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+
         .mypageLink {
             text-decoration-line: none;
             color: #000000;
+        }
+
+        /* 브라우저 크기가 줄면 사라지는 최대 크기 설정 */
+        @media screen and (max-width: 1090px) {
+            .login_btn {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            .logout_btn {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 1100px) {
+            .mypageLink, #show-id, #show-textid {
+                display: none;
+            }
         }
 
         .s-box {
@@ -102,6 +135,7 @@
             margin-left: 550px;
             margin-top: 0px;
         }
+
 
         summary::marker {
             display: none;
@@ -160,6 +194,7 @@
 
         .mid {
             width: 80%;
+            min-width: 900px;
             height: 600px;
             margin: 60px auto;
             display: flex;
@@ -173,7 +208,7 @@
         .audB {
             display: flex;
             flex-direction: row;
-            margin: 10px 0 0 0;
+            margin: 10px 0 0 20px;
         }
 
         .audB>* {
@@ -181,6 +216,11 @@
             height: 400px;
             font-size: 17px;
             font-weight: 500;
+            margin-right: 10px;
+        }
+
+        .audB>:last-child {
+            margin-right: 0;
         }
 
         .audB>* img {
@@ -279,10 +319,10 @@
 </div>
 -->
         <th:block th:if="${loginId}" class="nav-area">
-            <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-texid"> 님</span>
+            <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-textid"> 님</span>
             <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink"
                                                 href="/mypage">마이페이지</a></span>
-            <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
+            <button class="logout_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
         </th:block>
         <th:block th:unless="${loginId}" class="nav-area">
             <button class="login_btn" type="button" onclick="location.href='/login'">로그인</button>

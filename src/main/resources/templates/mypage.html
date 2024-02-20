@@ -19,6 +19,7 @@
 
         .header {
             width: 100%;
+            min-width: 900px;
             height: 100px;
             background: #EEEEEE;
             font-family: 'Gothic A1', sans-serif;
@@ -61,6 +62,25 @@
         .mypageLink {
             text-decoration-line: none;
             color: #000000;
+        }
+
+        /* 브라우저 크기가 줄면 사라지는 최대 크기 설정 */
+        @media screen and (max-width: 1090px) {
+            .login_btn {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            .logout_btn {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 1100px) {
+            .mypageLink, #show-id, #show-textid {
+                display: none;
+            }
         }
 
         .search {
@@ -172,6 +192,7 @@
         .sidebar {
             margin-top: 100px;
             width: 25%;
+            min-width: 180px;
             height: 100%;
             background: white;
             box-shadow: 1px 1px #bbb;
@@ -190,6 +211,7 @@
         ul {
             list-style-type: none;
             width: 25%;
+            min-width: 180px;
             position: fixed;
             height: 100%;
             overflow: auto;
@@ -342,7 +364,7 @@
             </div>
 
             <th:block th:if="${loginId}" class="nav-area">
-                <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-texid"> 님</span>
+                <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-textid"> 님</span>
                 <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink" href="/mypage">마이페이지</a></span>
                 <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
             </th:block>

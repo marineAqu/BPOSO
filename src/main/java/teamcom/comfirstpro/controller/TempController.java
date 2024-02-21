@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import teamcom.comfirstpro.DTO.MemberDTO;
+import teamcom.comfirstpro.DTO.MovieinfoDTO;
 import teamcom.comfirstpro.principal.PrincipalDetails;
 import teamcom.comfirstpro.principal.PrincipalDetailsService;
 import teamcom.comfirstpro.service.MemberService;
@@ -81,6 +82,7 @@ public class TempController {
     }
  */
 
+    //TODO: 보고싶어요, 후기리스트의 경우 중앙에 배치하지 말고 가장 위에 배치한 뒤 스크롤할 수 있도록 수정하기
     @GetMapping("mypage")
     public String mypage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
@@ -104,6 +106,20 @@ public class TempController {
     @GetMapping("main")
     public String main(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
+
+        //띄울 영화 정보
+        List<MovieinfoDTO> list = movieinfoService.SearchMainMovie();
+
+        /*
+        관객수 top5 영화 등은 변동이 적기 때문에 별도의 테이블을 만들고 캐싱 등을 사용하는 방식으로 지금처럼 하나하나 조회하는 것이 옳지 않다고 생각하나
+        포스터는 별도의 api를 사용하는 관계로 지금과 같이 로직을 구현
+         */
+
+        model.addAttribute("top1", list.get(0));
+        model.addAttribute("top2", list.get(1));
+        model.addAttribute("top3", list.get(2));
+        model.addAttribute("top4", list.get(3));
+        model.addAttribute("top5", list.get(4));
         return "main";
     }
 

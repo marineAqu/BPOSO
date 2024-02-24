@@ -87,10 +87,9 @@ public class TempController {
     public String mypage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
 
+        //<홈> 탭
         PrincipalDetails principalDetails = (PrincipalDetails) userDetails;
         model.addAttribute("userName", principalDetails.getNickName());
-
-        //<홈> 탭
 
 
         //<보고싶어요> 탭
@@ -101,6 +100,34 @@ public class TempController {
 
 
         return "mypage";
+    }
+
+    @PostMapping("modifyMyInfo")
+    public String modifyMyInfo(String userId, String userName, Errors errors, @AuthenticationPrincipal UserDetails userDetails) {
+        PrincipalDetails principalDetails = (PrincipalDetails) userDetails;
+
+        //값이 변경되지 않은 경우
+        if(userId == userDetails.getUsername() && userName == principalDetails.getNickName()) return "변경된 내용이 없습니다.";
+
+        //값이 변경된 경우
+        else{
+            //값 검증
+            MemberDTO memberDTO = new MemberDTO();
+            memberDTO.setUsername(userId);
+            memberDTO.setNickname(userName);
+            signUpFormValidator.validate(memberDTO, errors); //중복을 포함한 유효성 검사
+
+            if (errors.hasErrors()) {
+                //유효성 통과 못한 필드와 메시지를 핸들링
+                Map<String, String> validatorResult = memberService.validateHandling(errors);
+                for (String key : validatorResult.keySet()) {
+                    return validatorResult.get(key);
+                }
+
+                return "유효성을 통과하지 못했습니다.";
+            }
+            else return "정상적으로 변경되었습니다.";
+        }
     }
 
     @GetMapping("main")

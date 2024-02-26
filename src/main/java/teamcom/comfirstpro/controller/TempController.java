@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,30 +104,44 @@ public class TempController {
     }
 
     @PostMapping("modifyMyInfo")
-    public String modifyMyInfo(String userId, String userName, Errors errors, @AuthenticationPrincipal UserDetails userDetails) {
-        PrincipalDetails principalDetails = (PrincipalDetails) userDetails;
+    public String modifyMyInfo(@Valid MemberDTO memberDTO, Errors errors, Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        //값이 변경되지 않은 경우
-        if(userId == userDetails.getUsername() && userName == principalDetails.getNickName()) return "변경된 내용이 없습니다.";
+        //변경사항이 없을 경우
+        if(memberDTO.getNickname().equals(((PrincipalDetails) principal).getNickName()) && memberDTO.getUsername().equals(((PrincipalDetails) principal).getUsername())){
+            model.addAttribute("isModified", "수정된 내용이 없습니다.");
+            model.addAttribute("modifiedFail", "Y");
+            return "mypage";
+        }
 
-        //값이 변경된 경우
-        else{
-            //값 검증
-            MemberDTO memberDTO = new MemberDTO();
-            memberDTO.setUsername(userId);
-            memberDTO.setNickname(userName);
-            signUpFormValidator.validate(memberDTO, errors); //중복을 포함한 유효성 검사
+        //패스워드는 수정사항이 없으므로 그대로 값을 제공
+        //memberDTO.setPassword(((PrincipalDetails) principal).getPassword());
+        //System.out.println("memberdto에 비밀번호 저장이 안 됨: "+memberDTO);
+        //값 검증
+        signUpFormValidator.modifiedValidate(memberDTO, errors, ((PrincipalDetails) principal).getNo()); //중복을 포함한 유효성 검사
 
-            if (errors.hasErrors()) {
-                //유효성 통과 못한 필드와 메시지를 핸들링
-                Map<String, String> validatorResult = memberService.validateHandling(errors);
-                for (String key : validatorResult.keySet()) {
-                    return validatorResult.get(key);
-                }
-
-                return "유효성을 통과하지 못했습니다.";
+        //(비밀번호는 제외하고) 닉네임과 아이디에 대한 오류가 있는지만 검증
+        if (errors.hasFieldErrors("username") || errors.hasFieldErrors("nickname")) {
+            System.out.println("에러 확인용:"+errors);
+            //유효성 통과 못한 필드와 메시지를 핸들링
+            Map<String, String> validatorResult = memberService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
             }
-            else return "정상적으로 변경되었습니다.";
+            //유효성을 통과하지 못한 경우
+            model.addAttribute("isModified", "정상적으로 수정되지 않았습니다.");
+            model.addAttribute("loginId", memberDTO.getUsername());
+            model.addAttribute("userName", memberDTO.getNickname());
+            model.addAttribute("modifiedFail", "Y");
+            return "mypage";
+        }
+        else{
+            //TODO: 코드 정리 필요, return 후 내 정보가 안 뜨는 문제 해결
+            memberService.modifiyMemInfo(memberDTO, ((PrincipalDetails) principal).getUsername());
+
+            //유효성을 통과한 경우
+            model.addAttribute("isModified", "정상적으로 수정되었습니다.");
+            return "mypage";
         }
     }
 

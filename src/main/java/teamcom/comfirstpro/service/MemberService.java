@@ -37,6 +37,15 @@ public class MemberService {
         memberRepository.save(memberEntity);
     }
 
+    //회원 정보를 수정해 저장 (닉네임, 아이디)
+    public void modifiyMemInfo(MemberDTO memberDTO, String username) {
+        MemberEntity memberEntity = memberRepository.findByUsername(username);
+
+        memberEntity.setNickname(memberDTO.getNickname());
+        memberEntity.setUsername(memberDTO.getUsername());
+        memberRepository.save(memberEntity);
+    }
+
     //스프링시큐리티 사용 이전 로그인 서비스
 /*
     public MemberDTO login(MemberDTO memberDTO) {

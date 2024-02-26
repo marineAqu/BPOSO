@@ -15,12 +15,13 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String lastPage = request.getSession().getAttribute("lastPage").toString();
-        if (lastPage != null && !lastPage.isEmpty()) {
+        if (request.getSession().getAttribute("lastPage") != null) {
+            String lastPage = request.getSession().getAttribute("lastPage").toString();
             clearAuthenticationAttributes(request);
             getRedirectStrategy().sendRedirect(request, response, lastPage);
         } else {
-            super.onAuthenticationSuccess(request, response, authentication);
+            //회원가입 후 로그인에 들어오는 경우와 같이 이전 페이지가 null이 되는 경우 main으로 리다이렉트
+            getRedirectStrategy().sendRedirect(request, response, "main");
         }
     }
 }

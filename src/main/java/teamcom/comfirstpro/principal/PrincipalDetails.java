@@ -49,6 +49,10 @@ public class PrincipalDetails implements UserDetails {
         return memberEntity.getNickname();
     }
 
+    public Long getNo() {
+        return memberEntity.getId();
+    }
+
     // 계정이 만료 되었는지 (true: 만료X)
     @Override
     public boolean isAccountNonExpired() {

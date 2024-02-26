@@ -78,7 +78,10 @@
         }
 
         @media screen and (max-width: 1100px) {
-            .mypageLink, #show-id, #show-textid {
+
+            .mypageLink,
+            #show-id,
+            #show-textid {
                 display: none;
             }
         }
@@ -259,6 +262,12 @@
                 height: 100%;
             }
 
+            .movieList {
+                position: absolute;
+                top: 20%;
+                overflow: auto;
+            }
+
             a {
                 position: relative;
             }
@@ -267,17 +276,34 @@
                 text-transform: uppercase;
                 font-size: 1em;
                 letter-spacing: 0.1em;
-                color: #EEEEEE;
+                /* color: #EEEEEE; */
                 font-weight: bold;
                 margin-top: 20px;
             }
 
-            .movieNm{
+            .movieNm {
                 font-weight: bold;
                 font-size: 20px;
             }
+
+            button:disabled {
+                color: #d5dbde;
+                background-color: #a5b2b8;
+            }
+
+            /*
+            button {
+                padding: 10%;
+                background: #B2CCFF;
+                color: #000000;
+                font-size: 14px;
+                border-radius: 10px;
+                border: 0;
+            }
+            */
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 
 
@@ -389,15 +415,37 @@
         <!--홈 탭-->
         <div id="Home" class="container active">
             <p th:text="${userName} + '님 환영합니다!'"> 아이디 님 환영합니다!</p>
+
+            <span th:text="${isModified}" style="color: red;"></span>
+            <div>
+                <form action="modifyMyInfo" method="post" modelAttribute="memberDTO">
+                    <label for="userId">아이디: </label>
+                    <input id="userId" name="username" th:value="${loginId}" required="required" minlength="4" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
+                    <br><span style="color: red;" th:text="${valid_username}"></span>
+
+                    <br>
+
+                    <label for="userName">닉네임: </label>
+                    <input id="userName" name="nickname" th:value="${userName}" required="required" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
+                    <br><span style="color: red;" th:text="${valid_nickname}"></span>
+
+                    <br>
+                    <br>
+                    <button class="login_btn" id="myInfoBtn" onclick="setAble()" th:disabled="${modifiedFail == 'Y'} ? 'disabled'">정보 변경</button>
+                    <button class="login_btn" type="submit" id="saveBtn" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">저장</button>
+                    <button class="login_btn">비밀번호 변경</button>
+                </form>
+            </div>
+
         </div>
 
 
         <!--보고싶어요 탭-->
         <div id="Like" class="container">
-            <p th:text="${userName} + '님의 보고싶어요'"> 아이디 님의 보고싶어요</p>
-            <table>
+            <p th:text="${userName} + '님의 보고싶어요'" style="position:absolute; top: 10%;"> 아이디 님의 보고싶어요</p>
+            <table class="movieList">
                 <tr th:each="Movieinfo : ${wantseeList}">
-                    <td style="width: 50%;">
+                    <td style="width: 50%; margin-bottom: 10%;">
                         <div style="cursor:pointer;" th:onclick="goToReview([[${Movieinfo.no}]])">
                             <span th:text="${Movieinfo.opnDe}">개봉일</span>
                             <span th:text="${Movieinfo.gradNm}">관람 등급</span>
@@ -414,11 +462,11 @@
 
         <!--후기 탭-->
         <div id="Review" class="container">
-            <p th:text="${userName} + '님이 남겨주신 후기'"> 아이디 님이 남겨주신 후기</p>
+            <p th:text="${userName} + '님이 남겨주신 후기'" style="position:absolute; top: 10%;"> 아이디 님이 남겨주신 후기</p>
 
-            <table>
+            <table class="movieList">
                 <tr th:each="ReviewInfo : ${reviewList}">
-                    <td style="width: 50%;">
+                    <td style="width: 50%; margin-bottom: 10%;">
                         <div style="cursor:pointer;" th:onclick="goToReview([[${ReviewInfo.movNo}]])">
                             <span class="movieNm" th:text="${ReviewInfo.movieNm}">영화 이름</span>
                             <span th:text="${ReviewInfo.rate}">내가 준 별점</span>
@@ -472,9 +520,21 @@
         });
     });
 
+
     //영화 번호에 해당하는 영화 상세 페이지로 이동
     function goToReview(movieNo) {
         var reviewPageUrl = "/review?movieNo=" + movieNo;
         window.location.href = reviewPageUrl;
+    }
+
+
+    function setAble() {
+        if (document.getElementById("userId").disabled == true) {
+            document.getElementById("userId").disabled = false;
+            document.getElementById("userName").disabled = false;
+
+            document.getElementById("myInfoBtn").disabled = true;
+            document.getElementById("saveBtn").disabled = false;
+        }
     }
 </script>

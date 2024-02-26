@@ -30,4 +30,18 @@ public class SignUpFormValidator implements Validator {
                     new Object[]{memberDTO.getUsername()}, "이미 사용중인 아이디입니다.");
         }
     }
+
+    //마이페이지에서 정보 수정 시 사용하는 validate, 중복 검사 시 본인은 제외
+    public void modifiedValidate(Object object, Errors errors, Long id) {
+        MemberDTO memberDTO = (MemberDTO) object;
+        if(memberRepository.findByNickname(memberDTO.getNickname()).getId() != id){
+            errors.rejectValue("nickname", "invalid.nickname",
+                    new Object[]{memberDTO.getNickname()}, "이미 사용중인 닉네임입니다.");
+        }
+
+        if(memberRepository.findByUsername(memberDTO.getUsername()).getId() != id){
+            errors.rejectValue("username", "invalid.username",
+                    new Object[]{memberDTO.getUsername()}, "이미 사용중인 아이디입니다.");
+        }
+    }
 }

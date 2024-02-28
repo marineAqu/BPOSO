@@ -419,14 +419,18 @@
             <span th:text="${isModified}" style="color: red;"></span>
             <div>
                 <form action="modifyMyInfo" method="post" modelAttribute="memberDTO">
+                    <label for="password">정보를 변경하려면 비밀번호를 입력하세요: </label>
+                    <input id="password" name="password" type="password" required="required" minlength="4" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
+                    <br>
+
                     <label for="userId">아이디: </label>
-                    <input id="userId" name="username" th:value="${loginId}" required="required" minlength="4" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
+                    <input id="userId" name="username" th:value="${ModLoginId}" required="required" minlength="4" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
                     <br><span style="color: red;" th:text="${valid_username}"></span>
 
                     <br>
 
                     <label for="userName">닉네임: </label>
-                    <input id="userName" name="nickname" th:value="${userName}" required="required" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
+                    <input id="userName" name="nickname" th:value="${ModUserName}" required="required" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
                     <br><span style="color: red;" th:text="${valid_nickname}"></span>
 
                     <br>
@@ -532,6 +536,7 @@
         if (document.getElementById("userId").disabled == true) {
             document.getElementById("userId").disabled = false;
             document.getElementById("userName").disabled = false;
+            document.getElementById("password").disabled = false;
 
             document.getElementById("myInfoBtn").disabled = true;
             document.getElementById("saveBtn").disabled = false;

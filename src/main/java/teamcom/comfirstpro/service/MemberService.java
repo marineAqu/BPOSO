@@ -37,6 +37,10 @@ public class MemberService {
         memberRepository.save(memberEntity);
     }
 
+    public Boolean passwordValid(String rawPasswd, String encodePw){
+        return passwordEncoder.matches(rawPasswd, encodePw);
+    }
+
     //회원 정보를 수정해 저장 (닉네임, 아이디)
     public void modifiyMemInfo(MemberDTO memberDTO, String username) {
         MemberEntity memberEntity = memberRepository.findByUsername(username);

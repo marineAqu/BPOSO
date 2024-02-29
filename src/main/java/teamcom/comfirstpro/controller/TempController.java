@@ -169,7 +169,6 @@ public class TempController {
             return "mypage";
         }
         else{
-            //TODO: 코드 정리 필요, return 후 내 정보가 안 뜨는 문제 해결
             memberService.modifiyMemInfo(memberDTO, ((PrincipalDetails) principal).getUsername());
 
             //유효성을 통과한 경우

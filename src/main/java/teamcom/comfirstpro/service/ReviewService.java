@@ -72,4 +72,8 @@ public class ReviewService {
         if (movies.size() > 0) return avgReview / movies.size();
         else return -1.0; //후기가 없을 경우 -1.0로 표시
     }
+
+    public Boolean ExitMyReview(Long movieNo, String userId) {
+        return reviewRepository.existsByUserIdAndMovNo(userId, movieNo);
+    }
 }

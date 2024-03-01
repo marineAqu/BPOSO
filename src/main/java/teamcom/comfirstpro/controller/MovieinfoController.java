@@ -72,7 +72,18 @@ public class MovieinfoController {
     @GetMapping("review")
     public String review(@RequestParam("movieNo") Long movieNo,
                          Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
+        //로그인 되어있다면
+        if(userDetails != null) {
+            model.addAttribute("loginId", userDetails.getUsername());
+
+            //보고싶어요 여부
+            model.addAttribute("wantWatch", wantseeService.IsMovieWantsee(userDetails.getUsername(), movieNo));
+
+            //이미 해당 영화에 리뷰를 작성했는지
+            if(reviewService.ExitMyReview(movieNo, userDetails.getUsername())) model.addAttribute("isReviewExist", 1);
+        }
+
+
         MovieinfoDTO movieinfoDTO;
 
         movieinfoDTO = movieinfoService.SearchByNo(movieNo);
@@ -83,9 +94,6 @@ public class MovieinfoController {
         model.addAttribute("drctr", movieinfoDTO.getDrctrNm());
         model.addAttribute("opd", movieinfoDTO.getOpnDe());
         model.addAttribute("rateAvg", reviewService.AvgReview(movieNo));
-
-        //보고싶어요 여부
-        if(userDetails != null) model.addAttribute("wantWatch", wantseeService.IsMovieWantsee(userDetails.getUsername(), movieNo));
 
         //검색 결과에 해당하는 list를 전달하고 search-result 페이지로 이동
         model.addAttribute("reviewList", reviewService.SearchReview(movieNo));

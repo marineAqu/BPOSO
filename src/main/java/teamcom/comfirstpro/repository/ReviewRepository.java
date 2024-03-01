@@ -15,4 +15,6 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
     @Query("SELECT avg(m.rate) FROM ReviewEntity m WHERE m.movNo = :movNo")
     double findAverageRateByMovNo(@Param("movNo") Long movNo);
 
+    Boolean existsByUserIdAndMovNo(String userId, Long movNo);
+
 }

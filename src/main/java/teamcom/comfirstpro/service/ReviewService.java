@@ -19,27 +19,25 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final MovieinfoRepository movieinfoRepository;
-    public void saveReview(String reviewContent, String loginId, double starpoint, Long no) {
-        // 1. dto -> entity 변환
-        // 2. repository의 save 메서드 호출
-
-        //ReviewEntity reviewEntity = ReviewEntity.toReviewEntity(reviewDTO);
-
+    public void saveReview(String reviewContent, String loginId, double starpoint, Long movNo) {
         ReviewEntity reviewEntity = new ReviewEntity();
 
         reviewEntity.setReviewCon(reviewContent);
         reviewEntity.setRate(starpoint);
         reviewEntity.setUserId(loginId);
-        reviewEntity.setMovNo(no);
-        //영화 이름도 받아야 함
+        reviewEntity.setMovNo(movNo);
 
-        Optional<MovieinfoEntity> byNo = movieinfoRepository.findByNo(no);
+        //이미 존재하면 기본키도 넣어서 update
+        Optional<ReviewEntity> myReview = reviewRepository.findByUserIdAndMovNo(loginId, movNo);
+        if(myReview.isPresent()) reviewEntity.setNo(myReview.get().getNo());
+
+        //영화 이름도 받아야 함
+        Optional<MovieinfoEntity> byNo = movieinfoRepository.findByNo(movNo);
         MovieinfoEntity movieinfoEntity = byNo.get();
         MovieinfoDTO dto = MovieinfoDTO.toMovieinfoDTO(movieinfoEntity);
         reviewEntity.setMovieNm(dto.getMovieNm());
 
         reviewRepository.save(reviewEntity);
-        // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
     }
 
     public List<ReviewDTO> SearchReview(Long movieNo) {
@@ -73,7 +71,11 @@ public class ReviewService {
         else return -1.0; //후기가 없을 경우 -1.0로 표시
     }
 
-    public Boolean ExitMyReview(Long movieNo, String userId) {
-        return reviewRepository.existsByUserIdAndMovNo(userId, movieNo);
+    public Optional<ReviewEntity> ExitMyReview(Long movieNo, String userId) {
+        return reviewRepository.findByUserIdAndMovNo(userId, movieNo);
+    }
+
+    public void deleteMyReview(String userId, String movName){
+        reviewRepository.deleteByUserIdAndMovieNm(userId, movName);
     }
 }

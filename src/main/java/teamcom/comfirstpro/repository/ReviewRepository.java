@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import teamcom.comfirstpro.entity.ReviewEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
     List<ReviewEntity> findByMovNo(Long movNo);
@@ -15,6 +16,8 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
     @Query("SELECT avg(m.rate) FROM ReviewEntity m WHERE m.movNo = :movNo")
     double findAverageRateByMovNo(@Param("movNo") Long movNo);
 
-    Boolean existsByUserIdAndMovNo(String userId, Long movNo);
+    Optional<ReviewEntity> findByUserIdAndMovNo(String userId, Long movNo);
+
+    void deleteByUserIdAndMovieNm(String userId, String movieNm);
 
 }

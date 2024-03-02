@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import teamcom.comfirstpro.DTO.MovieinfoDTO;
 import teamcom.comfirstpro.DTO.ReviewDTO;
 import teamcom.comfirstpro.entity.ReviewEntity;
@@ -85,9 +86,8 @@ public class ReviewController {
     }
 
     @PostMapping("deleteMyReview")
-    public void deleteMyReview(@RequestParam("userId") String userId, @RequestParam("movName") String movName) {
+    public @ResponseBody void deleteMyReview(@RequestParam("userId") String userId, @RequestParam("movName") String movName) {
 
-        //리뷰 삭제
         reviewService.deleteMyReview(userId, movName);
     }
 

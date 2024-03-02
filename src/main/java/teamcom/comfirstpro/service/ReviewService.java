@@ -2,6 +2,7 @@ package teamcom.comfirstpro.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import teamcom.comfirstpro.DTO.MovieinfoDTO;
 import teamcom.comfirstpro.DTO.ReviewDTO;
 import teamcom.comfirstpro.entity.MovieinfoEntity;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;

@@ -374,15 +374,11 @@
             border: 1px solid rgb(8, 131, 149);
             color: rgb(8, 131, 149);
             background-color: white;
-
+            cursor: pointer;
         }
 
-        .reset-bt {
-
-            width: 40px;
-            border: 1px solid rgb(8, 131, 149);
-            color: rgb(8, 131, 149);
-            background-color: white;
+        .corr-bt:disabled {
+        background-color: gainsboro;
         }
 
         .showComment {
@@ -556,7 +552,8 @@
         <br>
 
         <div class="www">
-            <button class="circle-button" th:classappend="${wantWatch == 1} ? 'clicked' : ''" onclick="toggleActiveClass(this)" align="middle">
+            <button class="circle-button" th:classappend="${wantWatch == 1} ? 'clicked' : ''"
+                    onclick="toggleActiveClass(this)" align="middle">
             </button>
             <span id="like"><br>&nbsp; 보고싶어요</span>
         </div>
@@ -573,57 +570,54 @@
                 <div class="comment-top">
                     <!--왼쪽 아이디 띄우기-->
                     <h4><span id="myid" th:text="${loginId != null ? loginId : '로그인 후에 이용해주세요'}"></span></h4>
-                    <p th:text="${session.loginId}"></p>
                     <!--중간 별점 재기-->
                     <div class="starpoint_wrap">
-                        <div class="starpoint_box">
-                            <label for="starpoint_1" class="label_star" title="0.5"><span
-                                    class="blind">0.5점></span></label>
-                            <label for="starpoint_2" class="label_star" title="1.0"><span
-                                    class="blind">1점></span></label>
-                            <label for="starpoint_3" class="label_star" title="1.5"><span
-                                    class="blind">1.5점></span></label>
-                            <label for="starpoint_4" class="label_star" title="2.0"><span
-                                    class="blind">2점></span></label>
-                            <label for="starpoint_5" class="label_star" title="2.5"><span
-                                    class="blind">2.5점></span></label>
-                            <label for="starpoint_6" class="label_star" title="3.0"><span
-                                    class="blind">3점></span></label>
-                            <label for="starpoint_7" class="label_star" title="3.5"><span
-                                    class="blind">3.5점></span></label>
-                            <label for="starpoint_8" class="label_star" title="4.0"><span
-                                    class="blind">4점></span></label>
-                            <label for="starpoint_9" class="label_star" title="4.5"><span
-                                    class="blind">4.5점></span></label>
-                            <label for="starpoint_10" class="label_star" title="5.0"><span
-                                    class="blind">5점></span></label>
-                            <input type="radio" name="starpoint" id="starpoint_1" value="0.5" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_2" value="1.0" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_3" value="1.5" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_4" value="2.0" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_5" value="2.5" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_6" value="3.0" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_7" value="3.5" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_8" value="4.0" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_9" value="4.5" class="star_radio">
-                            <input type="radio" name="starpoint" id="starpoint_10" value="5.0" class="star_radio">
+                        <div class="starpoint_box" id="radioDiv">
+                            <label for="starpoint_1" class="label_star" title="0.5"><span class="blind">0.5점></span></label>
+                            <label for="starpoint_2" class="label_star" title="1.0"><span class="blind">1점></span></label>
+                            <label for="starpoint_3" class="label_star" title="1.5"><span class="blind">1.5점></span></label>
+                            <label for="starpoint_4" class="label_star" title="2.0"><span class="blind">2점></span></label>
+                            <label for="starpoint_5" class="label_star" title="2.5"><span class="blind">2.5점></span></label>
+                            <label for="starpoint_6" class="label_star" title="3.0"><span class="blind">3점></span></label>
+                            <label for="starpoint_7" class="label_star" title="3.5"><span class="blind">3.5점></span></label>
+                            <label for="starpoint_8" class="label_star" title="4.0"><span class="blind">4점></span></label>
+                            <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점></span></label>
+                            <label for="starpoint_10" class="label_star" title="5.0"><span class="blind">5점></span></label>
+
+                            <input type="radio" name="starpoint" id="starpoint_1" value="0.5" class="star_radio" th:checked="${myReviewRate==0.5}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_2" value="1.0" class="star_radio" th:checked="${myReviewRate==1.0}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_3" value="1.5" class="star_radio" th:checked="${myReviewRate==1.5}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_4" value="2.0" class="star_radio" th:checked="${myReviewRate==2.0}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_5" value="2.5" class="star_radio" th:checked="${myReviewRate==2.5}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_6" value="3.0" class="star_radio" th:checked="${myReviewRate==3.0}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_7" value="3.5" class="star_radio" th:checked="${myReviewRate==3.5}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_8" value="4.0" class="star_radio" th:checked="${myReviewRate==4.0}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_9" value="4.5" class="star_radio" th:checked="${myReviewRate==4.5}" th:disabled="${isReviewExist} ? 'disabled'">
+                            <input type="radio" name="starpoint" id="starpoint_10" value="5.0" class="star_radio" th:checked="${myReviewRate==5.0}" th:disabled="${isReviewExist} ? 'disabled'">
                             <span class="starpoint_bg"></span>
                         </div>
                     </div>
 
-                    <span class="bt">
-                            <button class="corr-bt" type="#">수정</button>
-                            <button class="reset-bt" type="reset">삭제</button>
-                        </span>
+                    <span>
+                        <th:block th:if="${isReviewExist}" class="bt">
+                            <button class="corr-bt" type="button" onclick="updateMyReview()">수정</button>
+                            <button class="corr-bt" type="button" id="deleteReview" onclick="deleteMyReview()">삭제</button>
+                        </th:block>
+                    </span>
                 </div>
 
-                <span class="ps_box">
-                        <textarea placeholder="리뷰를 적어보세요" class="int" name="reviewContent"></textarea>
-                    </span>
+                <!--이미 존재하면 disabled-->
+                <th:block th:if="${isReviewExist}" class="ps_box">
+                    <textarea placeholder="리뷰를 적어보세요" class="int" th:text="${myReviewText}" name="reviewContent" id="reviewContent" disabled></textarea>
+                </th:block>
+
+                <!--존재하지 않음-->
+                <th:block th:unless="${isReviewExist}" class="ps_box">
+                    <textarea placeholder="리뷰를 적어보세요" class="int" name="reviewContent"></textarea>
+                </th:block>
                 <br>
-                <!--<input type="submit" class="btn" onclick="reviewPostFun(event)" value="등록">-->
                 <div class="comment-bottom">
-                    <button type="button" onclick="reviewPostFun(event)">등록</button>
+                    <button type="button" id="submitReviewBtn" onclick="reviewPostFun(event)" th:disabled="${isReviewExist == 1} ? 'disabled'">등록</button>
                 </div>
             </form>
             <!--</form>-->
@@ -631,7 +625,7 @@
     </ul>
 
     <div class="showComment">
-        <table th:each="Review: ${reviewList}">
+        <table>
             <thead>
             <tr>
                 <th> 평점 </th>
@@ -640,10 +634,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="Review: ${reviewList}">
                 <td>
-                    <!-- 별점 숫자지???
-            이거 switch문이니까 별점대로 th:case 수정해도됨 -->
                     <th:block th:switch="${Review.rate}">
                         <div class="star-review-back">
                             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -749,33 +741,33 @@
                 console.error('데이터를 가져오는 중 오류 발생:', error);
             });
 
-//보고싶어요 버튼을 눌렀을 때 함수
-    function toggleActiveClass(element) {
+        //보고싶어요 버튼을 눌렀을 때 함수
+        function toggleActiveClass(element) {
 
-        if(document.getElementById("myid").innerText == "로그인 후에 이용해주세요") alert("로그인 후에 이용해주세요.");
-else{
-var heartChk;
-        if (element.classList.contains('clicked')) heartChk = 1;
-        else heartChk = 0;
+            if (document.getElementById("myid").innerText == "로그인 후에 이용해주세요") alert("로그인 후에 이용해주세요.");
+            else {
+                var heartChk;
+                if (element.classList.contains('clicked')) heartChk = 1;
+                else heartChk = 0;
 
-        $.ajax(
-            {
-                type: "post",
-                url: "saveWantsee",
-                data: {
-                    "userId": document.getElementById("myid").innerText,
-                    "heartChk": heartChk,
-                    "movName": document.getElementById("movieName").innerText
-                },
-                success: function (res) {
-                    element.classList.toggle('clicked');
-                },
-                error: function (err) {
-                    alert("통신 상의 오류가 발생했습니다. 다시 시도해주세요.");
-                }
-            });
-}
-    }
+                $.ajax(
+                    {
+                        type: "post",
+                        url: "saveWantsee",
+                        data: {
+                            "userId": document.getElementById("myid").innerText,
+                            "heartChk": heartChk,
+                            "movName": document.getElementById("movieName").innerText
+                        },
+                        success: function (res) {
+                            element.classList.toggle('clicked');
+                        },
+                        error: function (err) {
+                            alert("통신 상의 오류가 발생했습니다. 다시 시도해주세요.");
+                        }
+                    });
+            }
+        }
 
 
         function reviewPostFun(event) {
@@ -800,6 +792,38 @@ var heartChk;
             else {
                 document.querySelector(".PostReview").submit();
             }
+        }
+
+        function updateMyReview(){
+            document.getElementById("submitReviewBtn").disabled = false;
+            document.getElementById("reviewContent").disabled = false;
+
+            var radioGroup = document.getElementById("radioDiv");
+            var radioButtons = radioGroup.getElementsByTagName("input");
+            for (var i = 0; i < radioButtons.length; i++) {
+                radioButtons[i].disabled = false;
+            }
+
+            //수정 버튼을 누르면 삭제 버튼은 사라짐 (삭제 버튼을 누르면 리뷰 내용이 리셋된다고 착각하는 경우를 방지하기 위하여)
+            document.getElementById("deleteReview").disabled = true;
+        }
+
+        function deleteMyReview(){
+            $.ajax(
+                {
+                    type: "post",
+                    url: "deleteMyReview",
+                    data: {
+                        "userId": document.getElementById("myid").innerText,
+                        "movName": document.getElementById("movieName").innerText
+                    },
+                    success: function (res) {
+                        location.reload();
+                    },
+                    error: function (err) {
+                        alert("통신 상의 오류가 발생했습니다. 다시 시도해주세요.");
+                    }
+                });
         }
     </script>
 </body>

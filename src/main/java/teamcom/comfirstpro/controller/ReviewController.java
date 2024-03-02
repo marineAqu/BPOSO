@@ -85,8 +85,7 @@ public class ReviewController {
     }
 
     @PostMapping("deleteMyReview")
-    public void deleteMyReview(@RequestParam("reviewContent") String userId,
-                                @RequestParam("movName") String movName) {
+    public void deleteMyReview(@RequestParam("userId") String userId, @RequestParam("movName") String movName) {
 
         //리뷰 삭제
         reviewService.deleteMyReview(userId, movName);

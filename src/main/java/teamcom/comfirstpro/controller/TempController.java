@@ -57,6 +57,7 @@ public class TempController {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
 
         model.addAttribute("movieList", movieinfoService.SearchMovie(searchName, genres, sort));
+        model.addAttribute("searchTitle", "\""+searchName+"\"");
 
         return "search-result";
     }

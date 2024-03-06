@@ -29,6 +29,7 @@
         .header-content {
             width: 80%;
             height: 100px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -37,7 +38,7 @@
 
         .logo {
             flex-grow: 3;
-            margin: 0 0 0 0;
+            margin: 0 5px 0 5px;
             font-family: 'Gothic A1', sans-serif;
             font-weight: 200;
             font-size: 14px;
@@ -45,6 +46,17 @@
         }
 
         .login_btn {
+            font-weight: normal;
+            border-width: 0;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .logout_btn {
             font-weight: normal;
             border-width: 0;
             padding: 10px;
@@ -142,8 +154,9 @@
             margin-top: 20px;
             border-radius: 8px;
             padding: 0;
-            background: #EBF5FB;
+            background: #ffffff;
             position: relative;
+            box-shadow: 0px 4px 8px rgba(126, 126, 126, 0.2);
         }
 
         details[open] summary {
@@ -188,21 +201,37 @@
             font-size: 16px;
         }
 
-        .search-text {
-            width: 100%;
-            background-color: #454545;
-            color: white;
-            font-weight: 700;
-            height: 50px;
-            line-height: 50px;
-            padding-left: 10%;
-            z-index: 2;
+    .search-text {
+        width: 100%;
+        background-color: #d1d1d1;
+        color: rgb(63, 63, 63);
+        font-size: 20px;
+        font-weight: 500;
+        height: 50px;
+        line-height: 50px;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+    }
 
+    .search-text-inner{
 
-        }
+        max-width: 1300px;
+        align-self: center;
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+
+    }
+
+    .search-text-inner p {
+        text-align: left;
+    }
+
 
         .below {
             width: 90%;
+            max-width: 1300px;
             background-color: white;
             min-height: 700px;
             margin: 20px auto;
@@ -341,7 +370,7 @@
         <th:block th:if="${loginId}" class="nav-area">
             <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-textid"> 님</span>
             <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink" href="/mypage">마이페이지</a></span>
-            <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
+            <button class="logout_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
         </th:block>
         <th:block th:unless="${loginId}" class="nav-area">
             <button class="login_btn" type="button" onclick="location.href='/login'">로그인</button>
@@ -351,7 +380,9 @@
 </div>
 
 <div class="search-text">
-    <h4 th:text="${searchTitle}+' 검색 결과'">"@검색입력" 검색 결과</h4>
+    <div class = "search-text-inner">
+        <h4 th:text="${searchTitle}+' 검색 결과'">"@검색입력" 검색 결과</h4>
+    </div>
 </div>
 
 

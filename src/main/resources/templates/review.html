@@ -29,6 +29,7 @@
         .header-content {
             width: 80%;
             height: 100px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -37,7 +38,7 @@
 
         .logo {
             flex-grow: 3;
-            margin: 0 0 0 0;
+            margin: 0 5px 0 5px;
             font-family: 'Gothic A1', sans-serif;
             font-weight: 200;
             font-size: 14px;
@@ -52,6 +53,17 @@
         }
 
         .login_btn {
+            font-weight: normal;
+            border-width: 0;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .logout_btn {
             font-weight: normal;
             border-width: 0;
             padding: 10px;
@@ -134,8 +146,10 @@
             margin-top: 20px;
             border-radius: 8px;
             padding: 0;
-            background: #EBF5FB;
+            background: #ffffff;
             position: relative;
+            box-shadow: 0px 4px 8px rgba(126, 126, 126, 0.2);
+            z-index: 9999;
         }
 
         details[open] summary {
@@ -181,7 +195,7 @@
         }
 
         .top {
-            width: 80%;
+            max-width: 1300px;
             min-width: 920px;
             height: 450px;
             margin: 2.2em auto 2.2em auto;
@@ -206,7 +220,8 @@
         }
 
         .input-review {
-            width: 100%;
+            max-width:1300px;
+            margin: 0 auto;
             min-width: 900px;
             height: 100%;
         }
@@ -231,6 +246,7 @@
             width: 75%;
             height: 3.3em;
             resize: vertical;
+            padding: 5px 5px 5px 5px;
         }
 
         .comment-form input.btn {
@@ -383,7 +399,8 @@
 
         .showComment {
             margin: 25px auto;
-            width: 75%;
+            width: 100%;
+            max-width: 1300px;
             height: 100%;
         }
 
@@ -516,7 +533,7 @@
         <th:block th:if="${loginId}" class="nav-area">
             <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-textid"> 님</span>
             <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink" href="/mypage">마이페이지</a></span>
-            <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
+            <button class="logout_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
         </th:block>
         <th:block th:unless="${loginId}" class="nav-area">
             <button class="login_btn" type="button" onclick="location.href='/login'">로그인</button>

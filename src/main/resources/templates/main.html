@@ -28,6 +28,7 @@
         .header-content {
             width: 80%;
             height: 100px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -146,9 +147,11 @@
             margin-top: 20px;
             border-radius: 8px;
             padding: 0;
-            background: #EBF5FB;
+            background: #ffffff;
             position: relative;
+            box-shadow: 0px 4px 8px rgba(126, 126, 126, 0.2);
         }
+
 
         details[open] summary {
             color: #4E4FEB;
@@ -195,6 +198,7 @@
         .mid {
             width: 80%;
             min-width: 920px;
+            max-width: 1300px;
             height: 600px;
             margin: 60px auto;
             display: flex;
@@ -208,7 +212,7 @@
         .audB {
             display: flex;
             flex-direction: row;
-            margin: 10px 0 0 20px;
+            margin: 10px 0 0 0;
         }
 
         .audB>* {
@@ -339,7 +343,7 @@
                 <img id="poster1" src="image/poster_loading.png" alt="">
             </a>
             <p id="top1name" th:text="${top1.movieNm}">1등영화</p>
-            <p th:if="${top1.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:if="${top1.avgRate == -1.0}" style="color: gray;">아직 등록된 리뷰가 없습니다.</p>
             <p th:unless="${top1.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top1.avgRate, 1, 3)}">★ 평점
             </p>
         </div>
@@ -348,7 +352,7 @@
                 <img id="poster2" src="image/poster_loading.png" alt="">
             </a>
             <p id="top2name" th:text="${top2.movieNm}">2등영화</p>
-            <p th:if="${top2.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:if="${top2.avgRate == -1.0}" style="color: gray;">아직 등록된 리뷰가 없습니다.</p>
             <p th:unless="${top2.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top2.avgRate, 1, 3)}">★ 평점
             </p>
         </div>
@@ -357,7 +361,7 @@
                 <img id="poster3" src="image/poster_loading.png" alt="">
             </a>
             <p id="top3name" th:text="${top3.movieNm}">3등영화</p>
-            <p th:if="${top3.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:if="${top3.avgRate == -1.0}" style="color: gray;">아직 등록된 리뷰가 없습니다.</p>
             <p th:unless="${top3.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top3.avgRate, 1, 3)}">★ 평점
             </p>
         </div>
@@ -366,7 +370,7 @@
                 <img id="poster4" src="image/poster_loading.png" alt="">
             </a>
             <p id="top4name" th:text="${top4.movieNm}">4등영화</p>
-            <p th:if="${top4.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:if="${top4.avgRate == -1.0}" style="color: gray;">아직 등록된 리뷰가 없습니다.</p>
             <p th:unless="${top4.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top4.avgRate, 1, 3)}">★ 평점
             </p>
         </div>
@@ -375,7 +379,7 @@
                 <img id="poster5" src="image/poster_loading.png" alt="">
             </a>
             <p id="top5name" th:text="${top5.movieNm}">5등영화</p>
-            <p th:if="${top5.avgRate == -1.0}">아직 등록된 리뷰가 없습니다.</p>
+            <p th:if="${top5.avgRate == -1.0}" style="color: gray;">아직 등록된 리뷰가 없습니다.</p>
             <p th:unless="${top5.avgRate == -1.0}" th:text="'★ '+${#numbers.formatDecimal(top5.avgRate, 1, 3)}">★ 평점
             </p>
         </div>

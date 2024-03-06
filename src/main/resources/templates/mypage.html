@@ -32,6 +32,7 @@
         .header-content {
             width: 80%;
             height: 100px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -40,15 +41,25 @@
 
         .logo {
             flex-grow: 3;
-            height: 50px;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            font-family: 'Gasoek One', sans-serif;
+            margin: 0 5px 0 5px;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
+            font-size: 14px;
             cursor: pointer;
         }
 
         .login_btn {
+            font-weight: normal;
+            border-width: 0;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .logout_btn {
             font-weight: normal;
             border-width: 0;
             padding: 10px;
@@ -79,9 +90,7 @@
 
         @media screen and (max-width: 1100px) {
 
-            .mypageLink,
-            #show-id,
-            #show-textid {
+            .mypageLink, #show-id, #show-textid {
                 display: none;
             }
         }
@@ -145,8 +154,9 @@
             margin-top: 20px;
             border-radius: 8px;
             padding: 0;
-            background: #EBF5FB;
+            background: #ffffff;
             position: relative;
+            box-shadow: 0px 4px 8px rgba(126, 126, 126, 0.2);
         }
 
         details[open] summary {
@@ -397,7 +407,7 @@
             <th:block th:if="${loginId}" class="nav-area">
                 <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-textid"> 님</span>
                 <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink" href="/mypage">마이페이지</a></span>
-                <button class="login_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
+                <button class="logout_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
             </th:block>
             <th:block th:unless="${loginId}" class="nav-area">
                 <button class="login_btn" type="button" onclick="location.href='/login'">로그인</button>

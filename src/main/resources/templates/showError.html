@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko-KR" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <title>잘못된 접근입니다.</title>
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: 0;
+            text-decoration: none;
+
+        }
+
+        .header {
+            width: 100%;
+            min-width: 920px;
+            height: 100px;
+            background: #EEEEEE;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
+        }
+
+        .header-content {
+            width: 80%;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            flex-grow: 3;
+            margin: 0 5px 0 5px;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .search {
+            flex-grow: 4;
+            height: 100%;
+            display: flex;
+        }
+
+        .login_btn {
+            font-weight: normal;
+            border-width: 0;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+
+        .logout_btn {
+            font-weight: normal;
+            border-width: 0;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #bcc7cc;
+            color: #FFFFFF;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+
+        .mypageLink {
+            text-decoration-line: none;
+            color: #000000;
+        }
+
+        /* 브라우저 크기가 줄면 사라지는 최대 크기 설정 */
+        @media screen and (max-width: 1090px) {
+            .login_btn {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            .logout_btn {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 1100px) {
+            .mypageLink, #show-id, #show-textid {
+                display: none;
+            }
+        }
+
+        .s-box {
+            width: 500px;
+            height: 50px;
+            position: relative;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .s-box input {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 15px;
+        }
+
+        .s-box button {
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            top: 2px;
+            right: -25px;
+            margin: 0;
+            border: none;
+            background-color: transparent;
+        }
+
+        .s-box button img {
+            width: 40px;
+            height: 40px;
+        }
+
+        summary {
+            list-style: none;
+            margin-left: 550px;
+            margin-top: 0px;
+        }
+
+
+        summary::marker {
+            display: none;
+            content: "▼";
+        }
+
+        details[open] {
+            margin-top: 20px;
+            border-radius: 8px;
+            padding: 0;
+            background: #EBF5FB;
+            position: relative;
+        }
+
+        details[open] summary {
+            color: #4E4FEB;
+        }
+
+        details[open] summary::marker {
+            color: #4E4FEB;
+            content: "▲";
+        }
+
+
+        .s-check {
+            display: flex;
+            align-items: center;
+        }
+
+        .s-d-genre {
+            bottom: 0;
+            margin: auto;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 1em;
+        }
+
+        .s-d-sort {
+            margin: auto auto;
+        }
+
+        .nav-area {
+            flex-grow: 1;
+            margin: auto;
+            font-weight: 700;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+
+        .nav-area a {
+            height: 100%;
+            font-size: 16px;
+        }
+
+        .mid {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .audB {
+            display: flex;
+            flex-direction: row;
+            margin: 10px 0 0 20px;
+        }
+
+        .audB>* {
+            width: 200px;
+            height: 400px;
+            font-size: 17px;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        .audB>:last-child {
+            margin-right: 0;
+        }
+
+        .audB>* img {
+            width: 150px;
+        }
+
+        .goHomeBtn{
+            margin-top: 10%;
+            width: 35%;
+            height: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 15px;
+            border-width: 0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header">
+  <div class="header-content">
+    <!--로고-->
+    <div class="logo" onClick="location.href='/main'">
+      <h1>BPOSO</h1>
+    </div>
+    <!--검색창-->
+    <div class="search">
+      <form action="SearchMovie" method="post">
+
+        <!--검색창/검색박스-->
+        <div class="s-box">
+          <input type="text" name="searchName" placeholder="제목, 감독 등으로 찾아보세요">
+          <button type="submit">
+            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+          </button>
+        </div>
+
+        <!--검색창/상세검색-->
+        <details>
+          <summary>상세검색</summary>
+
+          <!--검색창/상세검색/버튼 누르면 이벤트 발생-->
+          <div class="s-check">
+            <div class="s-d-genre">
+              <div class="col-1">
+                <h3>장르</h3>
+                <input type="checkbox" name="genre" value="checkall" onclick="selectAll(this)"
+                       checked> 전체 선택
+                <br>
+                <input type="checkbox" name="genre" value="드라마" checked> 드라마
+                <br>
+                <input type="checkbox" name="genre" value="범죄" checked> 범죄
+                <br>
+                <input type="checkbox" name="genre" value="코미디" checked> 코미디
+                <br>
+                <input type="checkbox" name="genre" value="액션" checked> 액션
+                <br>
+                <input type="checkbox" name="genre" value="공포(호러)" checked> 공포(호러)
+                <br>
+                <input type="checkbox" name="genre" value="미스터리" checked> 미스터리
+                <br>
+                <input type="checkbox" name="genre" value="사극" checked> 사극
+              </div>
+
+              <div class="col-2">
+                <input type="checkbox" name="genre" value="스릴러" checked> 스릴러
+                <br>
+                <input type="checkbox" name="genre" value="애니메이션" checked> 애니메이션
+                <br>
+                <input type="checkbox" name="genre" value="멜로/로맨스" checked> 멜로/로맨스
+                <br>
+                <input type="checkbox" name="genre" value="공연" checked> 공연
+                <br>
+                <input type="checkbox" name="genre" value="다큐멘터리" checked> 다큐멘터리
+                <br>
+                <input type="checkbox" name="genre" value="가족" checked> 가족
+                <br>
+                <input type="checkbox" name="genre" value="기타" checked> 기타
+                <br>
+                <input type="checkbox" name="genre" value="성인물(에로)" checked> 성인물(에로)
+              </div>
+
+            </div>
+            <div class="s-d-sort">
+
+              <h3>정렬</h3>
+              <input type="radio" name="sort" value="관객많은순" checked> 관객많은순
+              <br>
+              <input type="radio" name="sort" value="관객적은순"> 관객적은순
+              <br>
+              <input type="radio" name="sort" value="별점높은순"> 별점높은순
+              <br>
+              <input type="radio" name="sort" value="별점낮은순"> 별점낮은순
+            </div>
+          </div>
+        </details>
+      </form>
+    </div>
+    <!--<a sec:authorize="isAuthenticated()" id="login-text" href="/login">로그인</a>-->
+    <!--
+<div class="nav-area">
+<span id="show-id" th:text="${session.loginId}" > 아이디</span> <span id="show-texid"> 님</span>
+<span><a class="mypageLink" id="mypageLink" href="/mypage-main">마이페이지</a></span>
+<a class="login_btn" id="login-text" href="/login">로그인</a>
+<a class="login_btn" id="sign-text" href="/sign-up">회원가입</a>
+</div>
+-->
+    <!--
+    <th:block th:if="${loginId}" class="nav-area">
+      <span id="show-id" th:text="${loginId}"> 아이디</span> <span id="show-textid"> 님</span>
+      <span style="margin-left: 10px;"><a class="mypageLink" id="mypageLink"
+                                          href="/mypage">마이페이지</a></span>
+      <button class="logout_btn" type="button" onclick="location.href='/logout'">로그아웃</button>
+    </th:block>
+    <th:block th:unless="${loginId}" class="nav-area">
+      <button class="login_btn" type="button" onclick="location.href='/login'">로그인</button>
+      <button class="login_btn" type="button" onclick="location.href='/sign-up'">회원가입</button>
+    </th:block>
+    -->
+  </div>
+</div>
+
+<div class="mid">
+
+  <h1 style="margin-top: 5%; margin-bottom: 10%;">잘못된 접근입니다.</h1>
+
+  <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 8.00008V12.0001M12 16.0001H12.01M3 7.94153V16.0586C3 16.4013 3 16.5726 3.05048 16.7254C3.09515 16.8606 3.16816 16.9847 3.26463 17.0893C3.37369 17.2077 3.52345 17.2909 3.82297 17.4573L11.223 21.5684C11.5066 21.726 11.6484 21.8047 11.7985 21.8356C11.9315 21.863 12.0685 21.863 12.2015 21.8356C12.3516 21.8047 12.4934 21.726 12.777 21.5684L20.177 17.4573C20.4766 17.2909 20.6263 17.2077 20.7354 17.0893C20.8318 16.9847 20.9049 16.8606 20.9495 16.7254C21 16.5726 21 16.4013 21 16.0586V7.94153C21 7.59889 21 7.42756 20.9495 7.27477C20.9049 7.13959 20.8318 7.01551 20.7354 6.91082C20.6263 6.79248 20.4766 6.70928 20.177 6.54288L12.777 2.43177C12.4934 2.27421 12.3516 2.19543 12.2015 2.16454C12.0685 2.13721 11.9315 2.13721 11.7985 2.16454C11.6484 2.19543 11.5066 2.27421 11.223 2.43177L3.82297 6.54288C3.52345 6.70928 3.37369 6.79248 3.26463 6.91082C3.16816 7.01551 3.09515 7.13959 3.05048 7.27477C3 7.42756 3 7.59889 3 7.94153Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <br>
+
+  <button class="goHomeBtn" type="button" onclick="location.href='/main'">홈으로 돌아가기</button>
+
+</div>
+
+</body>
+
+</html>
+<script>
+    function selectAll(selectAll) {
+        const checkboxes = document.getElementsByName('genre');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAll.checked;
+        })
+    }
+
+    function goToReview(movieNo){
+        var reviewPageUrl = "/review?movieNo=" + movieNo;
+        window.location.href = reviewPageUrl;
+    }
+
+
+
+</script>

@@ -20,8 +20,8 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             clearAuthenticationAttributes(request);
             getRedirectStrategy().sendRedirect(request, response, lastPage);
         } else {
-            //회원가입 후 로그인에 들어오는 경우와 같이 이전 페이지가 null이 되는 경우 main으로 리다이렉트
-            getRedirectStrategy().sendRedirect(request, response, "main");
+            //이전 페이지가 null인 경우
+            getRedirectStrategy().sendRedirect(request, response, "showError");
         }
     }
 }

@@ -32,7 +32,7 @@ public class MemberController {
 
     @GetMapping("sign-up")
     public String signup(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) return "main"; //이미 로그인한 경우 메인으로
+        if(userDetails != null) return "showError"; //이미 로그인했을 경우 에러 페이지로
         return "sign-up";
     }
 
@@ -56,7 +56,7 @@ public class MemberController {
 
     @GetMapping("login")
     public String login(HttpServletRequest request, HttpSession session, @AuthenticationPrincipal UserDetails userDetails) {
-        if(userDetails != null) return "main"; //이미 로그인했을 경우 메인으로
+        if(userDetails != null) return "showError"; //이미 로그인했을 경우 에러 페이지로
 
         //로그인에 실패해서 request.getHeader("Referer")가 로그인 페이지일 경우 세션의 lastpage를 갱신하지 않음 (로그인 성공 후에 로그인 페이지를 이전 페이지로 인식해서 다시 로그인페이지로 돌아가지 않도록)
         if(!request.getHeader("Referer").equals("http://localhost:8080/login")) session.setAttribute("lastPage", request.getHeader("Referer")); //로그인 성공 시 이전 페이지로 이동

@@ -17,62 +17,33 @@ public class MovieinfoService {
 
     private final MovieinfoRepository movieinfoRepository;
     private final ReviewRepository reviewRepository;
+    private final ReviewService reviewService;
 
     public List<MovieinfoDTO> SearchMovie(String searchName, List<String> genres, String sort) {
         //제목으로 검색
         List<MovieinfoEntity> movieinfoEntityList = movieinfoRepository.findByMovieNm(searchName);
 
-        //검색 결과 (7.19 전 코드: 장르선택 X)
-        //List<MovieinfoDTO> mav = new ArrayList<>();
-        //검색 결과를 하나씩 mav에 붙임
-        //for(MovieinfoEntity movieinfoEntity: movieinfoEntityList){
-        //    mav.add(MovieinfoDTO.toMovieinfoDTO(movieinfoEntity));
-        //}
-
-        //검색 결과 (7.19 이후 코드: 장르선택 가능)
+        //검색 결과
         List<MovieinfoDTO> mav = new ArrayList<MovieinfoDTO>();
         mav = movieinfoEntityList.stream()
                 .filter(movie -> genres == null || genres.isEmpty() || genres.contains(movie.getGenreNm()))
                 .map(movie -> MovieinfoDTO.toMovieinfoDTO(movie))
                 .collect(Collectors.toList());
 
-        /* 검증용
+
         for(MovieinfoDTO movieinfoDTO: mav){
-            System.out.println(mav);
+            movieinfoDTO.setAvgRate(reviewService.AvgReview(movieinfoDTO.getNo()));
         }
-        */
 
-        // 관객 수에 따라 정렬: 7.19 이후 코드
-        if ("관객많은순".equals(sort)) {
-            Collections.sort(mav, Comparator.comparingInt(MovieinfoDTO::getViewngNmprCo).reversed());
-            //mav.sort(Integer.parseInt(MovieinfoEntity.getViewngNmprCo()));
-        }
-        else if ("관객적은순".equals(sort)) {
-            Collections.sort(mav, Comparator.comparingInt(MovieinfoDTO::getViewngNmprCo));
-            //mav.sort(Comparator.comparingInt(Integer.parseInt(MovieinfoDTO::getViewngNmprCo)).reversed());
-        }
-        else System.out.println("별점 정렬 구현X"+sort);
+        // 관객 수에 따라 정렬
+        if ("관객많은순".equals(sort)) Collections.sort(mav, Comparator.comparingInt(MovieinfoDTO::getViewngNmprCo).reversed());
+        else if ("관객적은순".equals(sort)) Collections.sort(mav, Comparator.comparingInt(MovieinfoDTO::getViewngNmprCo));
 
+        //별점에 따라 정렬
+        else if("별점높은순".equals(sort)) Collections.sort(mav, Comparator.comparingDouble(MovieinfoDTO::getAvgRate).reversed());
+        else if("별점낮은순".equals(sort)) Collections.sort(mav, Comparator.comparingDouble(MovieinfoDTO::getAvgRate));
 
-        //mav.addObject("movieinfoEntityList", movieinfoEntityList);
-        //mav.setViewName("header-temp");
-
-
-
-        //System.out.println("검색키워드:" + searchName);
         return mav;
-        //return movieinfoRepository.SearchMovie(searchName);
-    }
-
-    public void PostReview(String reviewContent, String loginId) {
-        //loginId
-        // 1. dto -> entity 변환
-        // 2. repository의 save 메서드 호출
-
-        //MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
-        //memberRepository.save(memberEntity);
-        // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
-
     }
 
     public MovieinfoDTO SearchByNo(Long no) {

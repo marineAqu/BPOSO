@@ -62,7 +62,6 @@ public class ReviewController {
             if(myReview.isPresent()) {
                 model.addAttribute("isReviewExist", 1);
                 model.addAttribute("myReviewText", myReview.get().getReviewCon());
-                //TODO: html 리뷰 이미 있으면 별점 해당 별점 띄우도록 수정
                 model.addAttribute("myReviewRate", myReview.get().getRate());
             }
         }

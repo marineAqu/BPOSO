@@ -150,7 +150,6 @@ public class MemberController {
         return "login";
     }
 
-    //TODO: 보고싶어요, 후기리스트의 경우 중앙에 배치하지 말고 가장 위에 배치한 뒤 스크롤할 수 있도록 수정하기
     @GetMapping("mypage")
     public String mypage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());

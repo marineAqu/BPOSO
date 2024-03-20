@@ -150,6 +150,26 @@ public class MemberController {
         return "login";
     }
 
+    //TODO: 보고싶어요, 후기리스트의 경우 중앙에 배치하지 말고 가장 위에 배치한 뒤 스크롤할 수 있도록 수정하기
+    @GetMapping("mypage")
+    public String mypage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if(userDetails != null) model.addAttribute("loginId", userDetails.getUsername());
+
+        //<홈> 탭
+        PrincipalDetails principalDetails = (PrincipalDetails) userDetails;
+        model.addAttribute("userName", principalDetails.getNickName());
+        model.addAttribute("ModLoginId", userDetails.getUsername());
+        model.addAttribute("ModUserName", principalDetails.getNickName());
+
+
+        //<보고싶어요> 탭
+        model.addAttribute("wantseeList", wantseeService.myWantseeList(userDetails.getUsername()));
+        //<후기리스트> 탭
+        model.addAttribute("reviewList", reviewService.SearchMyReview(userDetails.getUsername()));
+
+
+        return "mypage";
+    }
 
     //스프링 시큐리티 사용 이전 로그인
 /*

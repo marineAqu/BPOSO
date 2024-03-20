@@ -33,31 +33,33 @@
 .left-button {
   font-family: "Roboto", sans-serif;
   outline: 0;
-  background: #B2CCFF;
+  background-color: #bcc7cc;
   width: 30%;
   border: 0;
   padding: 15px;
-  color: #000000;
+  color: #FFFFFF;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
   float: left;
+  border-radius: 10px;
 }
 
 .right-button {
   font-family: "Roboto", sans-serif;
   outline: 0;
-  background: #B2CCFF;
+  background-color: #bcc7cc;
   width: 30%;
   border: 0;
   padding: 15px;
-  color: #000000;
+  color: #FFFFFF;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
   float: right;
+  border-radius: 10px;
 }
 
 .form left-button:hover,.form button:active,.form button:focus {
@@ -68,14 +70,21 @@
   background: #B2CCFF;
 }
 
+.logo {
+    width: 100%;
+    text-align: center;
+}
+
 </style>
 </head>
 
 <body>
 <div class="login-page">
-
+    <div class="logo" onClick="location.href='/main'">
+        <h1>BPOSO</h1>
+    </div>
     <div class="form">
-        <h1 class="logo">로그인</h1>
+        <h1>로그인</h1>
         <form class="login-form" action="/login_process" method="post">
             <input type="text" name="username" placeholder="아이디를 입력하세요."/>
             <input type="password" name="password" placeholder="비밀번호를 입력하세요."/>

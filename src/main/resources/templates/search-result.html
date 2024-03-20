@@ -267,6 +267,9 @@
             margin-left: 0;
             border-bottom: 1px solid gray;
             table-layout: fixed;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px 10px;
         }
 
         td {
@@ -389,7 +392,7 @@
 <div class="below">
     <div class="oddeven">
         <!--테이블 김도연 수정 (2열)-->
-        <table style="width: 100%;">
+        <table>
             <tr th:each="Movieinfo, iterStat : ${movieList}" th:if="${iterStat.index % 2 == 0}">
                 <td class="movieTd">
                     <div style="cursor:pointer;" th:onclick="goToReview([[${Movieinfo.no}]])">

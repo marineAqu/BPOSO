@@ -44,7 +44,7 @@ public class SignUpFormValidator implements Validator {
         });
 
         try {
-            if(memberRepository.findByUsername(memberDTO.getUsername()).getId() == id){
+            if(memberRepository.findByUsername(memberDTO.getUsername()).getId() != id){
                 errors.rejectValue("username", "invalid.username",
                         new Object[]{memberDTO.getUsername()}, "이미 사용중인 아이디입니다.");
             }

@@ -15,6 +15,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        //로그인, 로그아웃 시 이전 페이지로 돌아가도록 함(이전 페이지가 있는 경우)
         if (request.getSession().getAttribute("lastPage") != null) {
             String lastPage = request.getSession().getAttribute("lastPage").toString();
             clearAuthenticationAttributes(request);

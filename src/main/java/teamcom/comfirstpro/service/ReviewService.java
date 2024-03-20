@@ -54,9 +54,6 @@ public class ReviewService {
     public List<ReviewEntity> SearchMyReview(String userId) {
         List<ReviewEntity> reviewEntityList = reviewRepository.findByUserId(userId);
 
-        //List<ReviewDTO> reviewDTOList = new ArrayList<>();
-        //for(ReviewEntity reviewEntity: reviewEntityList) reviewDTOList.add(ReviewDTO.toReviewDTO(reviewEntity));
-
         return reviewEntityList;
     }
 

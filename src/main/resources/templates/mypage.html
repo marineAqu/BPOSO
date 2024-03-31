@@ -272,10 +272,18 @@
                 height: 100%;
             }
 
+
             .movieList {
                 position: absolute;
                 top: 20%;
                 overflow: auto;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .movieList tr {
+                width: calc(50% - 20px); /* 한 줄에 두 개의 아이템을 표시하도록 설정 */
+                margin: 10px; /* 아이템 간의 간격 조정 */
             }
 
             a {
@@ -312,11 +320,24 @@
             }
             */
 
-            .homeInput{
+            .homeInput {
                 width: 100%;
                 padding: 10px;
             }
+
+
+            #Like .movieList tr td,
+            #Review table tr td {
+                width: 100%;
+                border-bottom: 1px solid #BDBDBD;
+                margin-bottom: 10px;
+                padding: 10px;
+            }
+
+
         }
+
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
@@ -436,24 +457,31 @@
                 <form action="modifyMyInfo" method="post" modelAttribute="memberDTO">
                     <label for="password">정보를 변경하려면 비밀번호를 입력하세요: </label>
                     <br>
-                    <input class="homeInput" id="password" name="password" type="password" required="required" minlength="4" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
+                    <input class="homeInput" id="password" name="password" type="password" required="required"
+                           minlength="4" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
                     <br>
                     <br><br><br>
 
                     <label for="userId">아이디: </label>
-                    <input class="homeInput" id="userId" name="username" th:value="${ModLoginId}" required="required" minlength="4" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
+                    <input class="homeInput" id="userId" name="username" th:value="${ModLoginId}" required="required"
+                           minlength="4" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
                     <br><span style="color: red;" th:text="${valid_username}"></span>
 
                     <br>
 
                     <label for="userName">닉네임: </label>
-                    <input class="homeInput" id="userName" name="nickname" th:value="${ModUserName}" required="required" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
+                    <input class="homeInput" id="userName" name="nickname" th:value="${ModUserName}" required="required"
+                           th:disabled="${modifiedFail != 'Y'} ? 'disabled'">
                     <br><span style="color: red;" th:text="${valid_nickname}"></span>
 
                     <br>
                     <br>
-                    <button class="login_btn" id="myInfoBtn" onclick="setAble()" th:disabled="${modifiedFail == 'Y'} ? 'disabled'">정보 변경</button>
-                    <button class="login_btn" type="submit" id="saveBtn" th:disabled="${modifiedFail != 'Y'} ? 'disabled'">저장</button>
+                    <button class="login_btn" id="myInfoBtn" onclick="setAble()"
+                            th:disabled="${modifiedFail == 'Y'} ? 'disabled'">정보 변경
+                    </button>
+                    <button class="login_btn" type="submit" id="saveBtn"
+                            th:disabled="${modifiedFail != 'Y'} ? 'disabled'">저장
+                    </button>
                 </form>
             </div>
 
@@ -487,7 +515,8 @@
             <table class="movieList">
                 <tr th:each="ReviewInfo : ${reviewList}">
                     <td style="width: 50%;">
-                        <div style="cursor:pointer; margin-bottom: 25px;" th:onclick="goToReview([[${ReviewInfo.movNo}]])">
+                        <div style="cursor:pointer; margin-bottom: 25px;"
+                             th:onclick="goToReview([[${ReviewInfo.movNo}]])">
                             <span class="movieNm" th:text="${ReviewInfo.movieNm}">영화 이름</span>
                             <span th:text="${ReviewInfo.rate}">내가 준 별점</span>
                             <br>
